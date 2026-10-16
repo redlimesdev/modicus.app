@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Modicus: a launcher with only app names</title>
-<meta name="description" content="Modicus is an Android home screen that shows your apps as plain text. No icons, no badges, no tracking.">
+<title>Modicus: a quiet home screen</title>
+<meta name="description" content="Modicus is a minimalist Android launcher. Favorites, all apps and widgets in black and white. No ads, no tracking.">
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="data:,">
 <style>
@@ -70,6 +70,9 @@
 
   section { margin-bottom: 2.5rem; }
 
+  .plain { list-style: none; padding: 0; margin: 0.75rem 0; }
+  .plain li + li { margin-top: 0.5rem; }
+
   p + p { margin-top: 0.75rem; }
 
   a {
@@ -96,9 +99,9 @@
 
 <main>
   <h1>Modicus</h1>
-  <p>Your home screen, with only the names of your apps.</p>
+  <p>A quiet home screen.</p>
 
-  <ul class="launcher" aria-label="Example of the Modicus home screen">
+  <ul class="launcher" aria-label="Example of the Modicus All apps screen">
     <li>Calendar</li>
     <li>Camera</li>
     <li>Clock</li>
@@ -113,8 +116,14 @@
 
   <section>
     <h2>What it does</h2>
-    <p>Modicus is an Android launcher. It lists your installed apps alphabetically as plain text. Tap a name to open the app. There are no icons, no badges and no animations.</p>
-    <p>It follows your system theme, light or dark.</p>
+    <p>Modicus is a minimalist Android launcher. Swipe between screens:</p>
+    <ul class="plain">
+      <li>Favorites: an alphabetical list, a list with your most used apps first, a tag cloud where the apps you use most appear larger and bolder, or monochrome icons.</li>
+      <li>All apps: every app, alphabetical, as plain text.</li>
+      <li>Settings: a few options, nothing more.</li>
+      <li>Widgets: an extra home screen for your widgets. Premium, one-time purchase.</li>
+    </ul>
+    <p>Black and white. It follows your system theme, light or dark. No badges, no animations.</p>
   </section>
 
   <section>
