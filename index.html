@@ -46,6 +46,13 @@
   .lines li { white-space:pre-wrap; padding-left:4ch; text-indent:-4ch; margin-bottom:var(--space-2); }
   .lines.off li { color:var(--gray); }
   .qm { font:inherit; color:var(--ink); background:var(--ground); border:0; padding:0; margin:0; cursor:pointer; text-align:left; white-space:pre; }
+  .lex { margin:0 0 var(--space-12); font-size:14px; line-height:22px; }
+  .lex dt { margin:0 0 var(--space-2); }
+  .lex .w { font-size:18px; color:var(--ink); }
+  .lex .ipa, .lex .pos { color:var(--gray); margin-left:1ch; white-space:nowrap; }
+  .lex dd { margin:0; padding-left:2ch; }
+  .lex .ety { color:var(--gray); margin-top:var(--space-2); }
+  .lex i { font-style:normal; color:var(--ink); }
   .switches { display:flex; flex-direction:column; gap:var(--space-2); margin:var(--space-6) 0 var(--space-12); }
   .qm:hover { text-decoration:underline; text-underline-offset:4px; }
   .qm:focus-visible { outline:var(--stroke-outline) solid var(--ink); outline-offset:4px; }
@@ -79,8 +86,15 @@
   <main>
     <section class="hero" aria-labelledby="t">
       <div>
+        <dl class="lex" lang="la">
+          <dt><span class="w">mo·di·cus</span> <span class="ipa" lang="">/ˈmɔ.dɪ.kʊs/</span> <span class="pos" lang="en">latin, adjective</span></dt>
+          <dd lang="en">1. moderate, of measured size</dd>
+          <dd lang="en">2. modest, restrained</dd>
+          <dd class="ety" lang="en">from <i>modus</i>, measure. the same root gives english <i>modicum</i>: a small amount.</dd>
+        </dl>
         <h1 id="t">a quiet home screen.</h1>
         <p class="lead">modicus is a home screen for android that shows your apps as plain text, in black and white. no colorful icons, no badges, no wallpaper. your phone asks for less of your attention.</p>
+        <p>free to use, every feature. no ads, no subscription. only the optional widgets screen is a one-time € 2,99.</p>
         <span class="btn" aria-disabled="true">[ coming soon to google play ]</span>
         <p class="meta">want to know when it is out? <a href="mailto:redlimesdev@gmail.com?subject=modicus%20launch">send an email</a>.</p>
       </div>
@@ -144,7 +158,7 @@
         <div>
           <h2 id="w">widgets, if you want them</h2>
           <p>premium adds a widgets screen: a clock, the weather or your calendar, shown in black, white and gray to match, or in full color if you prefer. one purchase of € 2,99, no subscription. it works offline.</p>
-          <p class="meta">everything else in modicus is free. no ads.</p>
+          <p class="meta">everything else in modicus is free.</p>
           <p class="meta">the screen-time widget shown is <a href="https://play.google.com/store/apps/details?id=com.socialscap.app">socialscap</a>, also by redlimesdev.</p>
         </div>
         <div class="pair">
