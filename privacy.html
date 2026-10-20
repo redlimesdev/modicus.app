@@ -1,144 +1,74 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Modicus privacy policy</title>
-<meta name="description" content="Privacy policy for Modicus, an Android launcher published by PBLIZ! B.V.">
-<meta name="color-scheme" content="light dark">
-<link rel="icon" href="data:,">
+<title>modicus · privacy policy</title>
+<meta name="description" content="Privacy policy for modicus, a minimalist Android home screen. modicus has no internet access and collects no data.">
+<meta name="color-scheme" content="dark light">
+<link rel="canonical" href="https://www.modicus.app/privacy.html">
+<link rel="icon" type="image/png" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #ffffff;
-    --fg: #000000;
-    --muted: #595959;
-    color-scheme: light dark;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #000000;
-      --fg: #ffffff;
-      --muted: #a6a6a6;
-    }
-  }
-
-  * { box-sizing: border-box; }
-
-  html {
-    background: var(--bg);
-    color: var(--fg);
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    font-weight: 400;
-    font-size: 100%;
-    -webkit-text-size-adjust: 100%;
-  }
-
-  body {
-    margin: 0;
-    padding: 4rem 1.5rem 3rem;
-    max-width: 36rem;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    line-height: 1.6;
-    font-size: 1.0625rem;
-  }
-
-  h1, h2, p { margin: 0; }
-
-  h1 {
-    font-size: 1.375rem;
-    font-weight: 400;
-    line-height: 1.9;
-  }
-
-  h2 {
-    font-size: 1.0625rem;
-    font-weight: 400;
-    color: var(--muted);
-    margin-bottom: 0.5rem;
-  }
-
-  section { margin-bottom: 2rem; }
-  .updated { color: var(--muted); margin-bottom: 2.5rem; }
-  p + p { margin-top: 0.75rem; }
-
-  a {
-    color: var(--fg);
-    text-decoration: underline;
-    text-underline-offset: 0.2em;
-  }
-  a:focus-visible {
-    outline: 2px solid var(--fg);
-    outline-offset: 3px;
-  }
-
-  footer {
-    margin-top: auto;
-    padding-top: 2rem;
-    color: var(--muted);
-    font-size: 0.9375rem;
-  }
-  footer a { color: var(--muted); }
+  :root { --ground:#000; --ink:#fff; --gray:#767676; }
+  @media (prefers-color-scheme: light) { :root { --ground:#fff; --ink:#000; } }
+  * { box-sizing:border-box; }
+  html, body { background:var(--ground); }
+  body { margin:0; color:var(--ink); font-family:"Noto Sans Mono","Droid Sans Mono",ui-monospace,monospace; font-size:17px; line-height:27px; }
+  a { color:var(--ink); text-underline-offset:4px; }
+  a:focus-visible { outline:2px solid var(--ink); outline-offset:4px; }
+  .wrap { max-width:720px; margin:0 auto; padding:24px 24px 96px; }
+  header { padding-bottom:48px; }
+  .brand { display:inline-flex; align-items:center; gap:12px; text-decoration:none; font-size:20px; }
+  .brand img { width:32px; height:32px; }
+  h1 { font-weight:400; font-size:36px; line-height:44px; margin:0 0 8px; }
+  h2 { font-weight:400; font-size:22px; line-height:30px; margin:48px 0 16px; }
+  p, li { max-width:64ch; }
+  ul { padding-left:2ch; }
+  .meta { font-size:14px; line-height:20px; color:var(--gray); }
+  @media (max-width:600px) { .wrap { padding:16px 16px 72px; } h1 { font-size:28px; line-height:36px; } }
 </style>
 </head>
 <body>
+<div class="wrap">
+  <header><a class="brand" href="/"><img src="favicon.png" alt="">modicus</a></header>
+  <main>
+    <h1>privacy policy</h1>
+    <p class="meta">applies to modicus for android (com.modicus.app) · last updated 20 october 2026</p>
 
-<main>
-  <h1>Privacy policy for Modicus</h1>
-  <p class="updated">Last updated: 17 October 2026</p>
+    <h2>in short</h2>
+    <p>modicus collects nothing. it has no internet access, so it cannot send anything anywhere. everything it keeps stays on your phone.</p>
 
-  <section>
-    <p>Modicus is a launcher app for Android, published by PBLIZ! B.V., Molenlaan 11 E, 1422 XN Uithoorn, the Netherlands.</p>
-  </section>
+    <h2>no internet access</h2>
+    <p>android's internet permission is removed from the app. modicus contains no ads, no tracking, no analytics, no crash reporting, no account and no third-party code that could send data.</p>
 
-  <section>
-    <h2>Data collection</h2>
-    <p>Modicus does not collect, store or share any personal data. The app has no internet permission and contains no analytics, advertising or third-party SDKs.</p>
-  </section>
+    <h2>what stays on your phone</h2>
+    <ul>
+      <li>your favorites and settings</li>
+      <li>how often you open apps, used only to sort favs when "learn by itself" is on. older use slowly counts less.</li>
+      <li>whether you bought premium</li>
+    </ul>
+    <p>this data is stored only on your device. it is removed when you uninstall modicus or clear its data.</p>
 
-  <section>
-    <h2>Installed apps and settings</h2>
-    <p>To show your apps, Modicus reads the list of launchable apps on your device. It also keeps your favorites, your settings and a count of how often you open each app through Modicus. Older use slowly counts less, so the favorites can follow your habits.</p>
-    <p>All of this stays on your device. It is never sent anywhere. Removing the app or clearing its storage deletes it.</p>
-  </section>
+    <h2>permissions</h2>
+    <ul>
+      <li><b style="font-weight:400">notification access</b> (optional, you switch it on): used only to show a dot next to apps that have a notification waiting. modicus looks at which app has a notification, never at what it says, and keeps nothing.</li>
+      <li><b style="font-weight:400">list of apps</b>: modicus only looks for apps that can be opened from a home screen, so it can show their names.</li>
+      <li><b style="font-weight:400">request uninstall</b>: used only when you tap "uninstall" on an app. android always asks you to confirm.</li>
+    </ul>
 
-  <section>
-    <h2>Notification dots</h2>
-    <p>Notification dots are optional and only work if you switch on notification access in Android. Modicus then shows a small dot for apps that have a notification waiting.</p>
-    <p>For this, Modicus checks only which app a notification comes from, and whether that app is allowed to show dots in your Android settings. It never reads the title, the text or any other content of a notification. Ongoing notifications, such as music or navigation, are not counted.</p>
-    <p>The list of apps is kept in memory only. It is not saved, logged or sent anywhere, and it is emptied when you switch notification access off. You can switch it off at any time in Android's settings.</p>
-  </section>
+    <h2>purchases</h2>
+    <p>premium is bought through google play. that purchase is handled by google, under <a href="https://policies.google.com/privacy">google's privacy policy</a>. modicus only learns whether premium was bought, and remembers that on your phone.</p>
 
-  <section>
-    <h2>Premium purchase</h2>
-    <p>Modicus offers an optional one-time Premium purchase that unlocks a widgets screen. The purchase is handled entirely by Google Play. Modicus does not receive your payment details. The app only asks Google Play whether Premium has been purchased on your account, and remembers the result on your device so it also works offline.</p>
-  </section>
+    <h2>children</h2>
+    <p>modicus collects no personal data from anyone, including children.</p>
 
-  <section>
-    <h2>Widgets</h2>
-    <p>Widgets are provided by other apps on your device. Modicus only displays them. Any data a widget handles is governed by the privacy policy of the app that provides it.</p>
-  </section>
+    <h2>changes</h2>
+    <p>if this policy changes, the new version will be posted on this page with a new date.</p>
 
-  <section>
-    <h2>Children</h2>
-    <p>Modicus does not collect data from anyone, including children.</p>
-  </section>
-
-  <section>
-    <h2>Changes</h2>
-    <p>If this policy changes, the new version will be published on this page with a new date.</p>
-  </section>
-
-  <section>
-    <h2>Contact</h2>
-    <p><a href="mailto:redlimesdev@gmail.com">redlimesdev@gmail.com</a></p>
-  </section>
-</main>
-
-<footer>
-  <p><a href="index.html">Modicus</a></p>
-</footer>
-
+    <h2>contact</h2>
+    <p>questions: <a href="mailto:redlimesdev@proton.me">redlimesdev@proton.me</a> · redlimesdev, the netherlands</p>
+  </main>
+</div>
 </body>
 </html>
