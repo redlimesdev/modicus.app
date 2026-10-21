@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>modicus · a quiet home screen for android</title>
+<title>modicus · A quiet home screen for Android</title>
 <meta name="description" content="modicus is a minimalist Android launcher that shows your apps as plain text, in black and white. No ads, no tracking, no internet access.">
 <meta name="color-scheme" content="dark light">
-<meta property="og:title" content="modicus · a quiet home screen for android">
+<meta property="og:title" content="modicus · A quiet home screen for Android">
 <meta property="og:description" content="Your apps as plain text, in black and white. No internet access.">
 <meta property="og:url" content="https://www.modicus.app/">
 <link rel="canonical" href="https://www.modicus.app/">
@@ -37,6 +37,18 @@
   p { margin:0 0 var(--space-4); max-width:60ch; }
   .meta { font-size:14px; line-height:20px; color:var(--gray); }
   .hero { display:grid; grid-template-columns:1fr 280px; gap:var(--space-12); align-items:center; padding-top:var(--space-12); }
+  .hero > div { grid-column:1; grid-row:1; }
+  .carousel { grid-column:2; grid-row:1; margin:0; }
+  .track { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; scroll-behavior:auto; scrollbar-width:none; border:var(--stroke-outline) solid var(--ink); border-radius:var(--radius-tile); background:#000; }
+  .track::-webkit-scrollbar { display:none; }
+  .track:focus-visible { outline:var(--stroke-outline) solid var(--ink); outline-offset:4px; }
+  .track img { flex:0 0 100%; width:100%; height:auto; display:block; scroll-snap-align:start; }
+  .carousel figcaption { display:flex; align-items:baseline; gap:var(--space-2); margin-top:var(--space-2); font-size:14px; line-height:20px; }
+  .carousel .cap { flex:1; text-align:center; color:var(--ink); }
+  .carousel .count { color:var(--gray); }
+  .nav { font:inherit; color:var(--ink); background:var(--ground); border:0; padding:0; cursor:pointer; }
+  .nav:hover { text-decoration:underline; text-underline-offset:4px; }
+  .nav:focus-visible { outline:var(--stroke-outline) solid var(--ink); outline-offset:4px; }
   .lead { font-size:20px; line-height:32px; }
   .btn { display:inline-block; font:inherit; color:var(--gray); text-decoration:none; white-space:pre; margin:var(--space-6) 0 var(--space-2); }
   .play { display:inline-block; margin:var(--space-6) 0 var(--space-2); line-height:0; }
@@ -72,7 +84,15 @@
     .wrap { padding:0 var(--space-4); }
     h1 { font-size:36px; line-height:42px; }
     .hero { grid-template-columns:1fr; }
-    .hero .phone { max-width:260px; }
+    .hero > div, .carousel { grid-column:auto; grid-row:auto; }
+    .hero { gap:var(--space-6); padding-top:var(--space-4); }
+    .carousel { width:100%; margin:0; }
+    .track { width:min(280px, calc(30vh / 2.23)); margin:0 auto; }
+    .carousel figcaption { font-size:13px; max-width:300px; margin:var(--space-2) auto 0; }
+    .lex { margin-bottom:var(--space-6); }
+    .hero > div { display:flex; flex-direction:column; align-items:flex-start; }
+    .hero .lex { order:1; } .hero h1 { order:2; margin-bottom:0; } .hero .play { order:3; margin:var(--space-4) 0 var(--space-2); }
+    .hero .play + .meta { order:4; margin-bottom:var(--space-6); } .hero .lead { order:5; } .hero > div > p:not(.lead):not(.meta) { order:6; }
     .three { grid-template-columns:1fr; max-width:260px; }
     .cols { grid-template-columns:1fr; }
     .pair { grid-template-columns:1fr; max-width:260px; gap:var(--space-12); }
@@ -85,76 +105,91 @@
 <div class="wrap">
   <header>
     <a class="brand" href="/"><img src="favicon.svg" alt="">modicus</a>
-    <nav><a href="#features">features</a><a href="#privacy">privacy</a></nav>
+    <nav><a href="#features">Features</a><a href="#privacy">Privacy</a></nav>
   </header>
 
   <main>
     <section class="hero" aria-labelledby="t">
+      <figure class="carousel" aria-roledescription="carousel" aria-label="modicus screens">
+        <div class="track" tabindex="0">
+          <img src="screenshots/favs-az-no-quickmenu.jpg" alt="favs as a plain a to z list." data-cap="a-z" width="1080" height="2408">
+          <img src="screenshots/favs-az.jpg" alt="a-z list with the quick menu at the bottom." data-cap="a-z · quick menu" width="1080" height="2408">
+          <img src="screenshots/favs-az-color-quickmenu.jpg" alt="a-z list with a full-color quick menu." data-cap="a-z · quick menu in full color" width="1080" height="2408" loading="lazy">
+          <img src="screenshots/favs-cloud-no-quickmenu.jpg" alt="favs as a word cloud, most-used apps larger." data-cap="cloud" width="1080" height="2408" loading="lazy">
+          <img src="screenshots/favs-cloud.jpg" alt="Word cloud with the quick menu at the bottom." data-cap="cloud · quick menu" width="1080" height="2408" loading="lazy">
+          <img src="screenshots/favs-cloud-color-quickmenu.jpg" alt="Word cloud with a full-color quick menu." data-cap="cloud · quick menu in full color" width="1080" height="2408" loading="lazy">
+          <img src="screenshots/favs-icons.jpg" alt="favs as monochrome icons in outlined squares." data-cap="icons" width="1080" height="2408" loading="lazy">
+          <img src="screenshots/favs-icons-color.jpg" alt="favs as full-color icons in outlined squares." data-cap="icons · full color" width="1080" height="2408" loading="lazy">
+          <img src="screenshots/all-icons.jpg" alt="All apps a to z, each with a small icon, and a letter bar." data-cap="all · with small icons" width="1080" height="2408" loading="lazy">
+          <img src="screenshots/widgets-mono.jpg" alt="Widgets screen in black, white and gray." data-cap="widgets" width="1080" height="2408" loading="lazy">
+          <img src="screenshots/widgets-color-mono-quickmenu.jpg" alt="Widgets screen in full color." data-cap="widgets · full color" width="1080" height="2408" loading="lazy">
+        </div>
+        <figcaption><button type="button" class="nav prev" aria-label="previous screen">[&lt;]</button><span class="cap" aria-live="polite">a-z</span><span class="count">01 / 11</span><button type="button" class="nav next" aria-label="next screen">[&gt;]</button></figcaption>
+      </figure>
       <div>
         <dl class="lex" lang="la">
-          <dt><span class="w">mo·di·cus</span> <span class="ipa" lang="">/ˈmɔ.dɪ.kʊs/</span> <span class="pos" lang="en">latin, adjective</span></dt>
+          <dt><span class="w">mo·di·cus</span> <span class="ipa" lang="">/ˈmɔ.dɪ.kʊs/</span> <span class="pos" lang="en">Latin, adjective</span></dt>
           <dd lang="en">1. moderate, of measured size</dd>
           <dd lang="en">2. modest, restrained</dd>
-          <dd class="ety" lang="en">from <i>modus</i>, measure. the same root gives english <i>modicum</i>: a small amount.</dd>
+          <dd class="ety" lang="en">From <i>modus</i>, measure. The same root gives English <i>modicum</i>: a small amount.</dd>
         </dl>
-        <h1 id="t">a quiet home screen.</h1>
-        <p class="lead">modicus is a home screen for android that shows your apps as plain text, in black and white. no colorful icons, no badges, no wallpaper. your phone asks for less of your attention.</p>
-        <p>free to use, every feature. no ads, no subscription. only the optional widgets screen is a one-time € 2,99.</p>
+        <h1 id="t">A quiet home screen.</h1>
+        <p class="lead">modicus is a home screen for Android that shows your apps as plain text, in black and white. No colorful icons, no badges, no wallpaper. Your phone asks for less of your attention.</p>
+        <p>Free to use, every feature. No ads, no subscription. Only the optional widgets screen is a one-time € 2,99.</p>
         <a class="play" href="https://play.google.com/store/apps/details?id=com.modicus.app"><img src="google-play-badge.png" alt="Get it on Google Play" width="478" height="142"></a>
-        <p class="meta">android 10 and newer.</p>
+        <p class="meta">Android 10 and newer.</p>
       </div>
-      <figure class="phone"><img src="screenshots/favs-cloud-no-quickmenu.jpg" alt="modicus favs as a word cloud: app names in white on black, the most-used ones larger." width="1080" height="2408"></figure>
     </section>
 
     <section aria-labelledby="favs">
-      <h2 id="favs">three ways to show your favorites</h2>
-      <p>a-z, cloud or icons. a-z and cloud can add the quick menu, a row of apps at the bottom. icons can be monochrome or full color.</p>
+      <h2 id="favs">Three ways to show your favorites</h2>
+      <p>Choose a-z, cloud or icons. With a-z and cloud you can add the quick menu, a row of apps at the bottom. The icons view can be monochrome or full color.</p>
       <div class="switches" role="group" aria-label="show options">
-        <button type="button" class="qm" data-key="qm" aria-pressed="true" aria-controls="favrow">[x] quick menu</button>
+        <button type="button" class="qm" data-key="qm" aria-pressed="false" aria-controls="favrow">[ ] quick menu</button>
         <button type="button" class="qm" data-key="color" aria-pressed="false" aria-controls="favrow">[ ] full color</button>
       </div>
       <div class="three" id="favrow">
-        <figure class="phone"><img data-qm="1" data-color="0" src="screenshots/favs-az.jpg" alt="favs as a plain a to z list, with the quick menu in monochrome." loading="lazy" width="1080" height="2408"><img data-qm="1" data-color="1" hidden src="screenshots/favs-az-color-quickmenu.jpg" alt="favs as a plain a to z list, with the quick menu in full color." loading="lazy" width="1080" height="2408"><img data-qm="0" data-color="*" hidden src="screenshots/favs-az-no-quickmenu.jpg" alt="favs as a plain a to z list, without the quick menu." loading="lazy" width="1080" height="2408"><figcaption><b>a-z</b> · a plain list, near your thumb</figcaption></figure>
-        <figure class="phone"><img data-qm="1" data-color="0" src="screenshots/favs-cloud.jpg" alt="favs as a word cloud, with the quick menu in monochrome." loading="lazy" width="1080" height="2408"><img data-qm="1" data-color="1" hidden src="screenshots/favs-cloud-color-quickmenu.jpg" alt="favs as a word cloud, with the quick menu in full color." loading="lazy" width="1080" height="2408"><img data-qm="0" data-color="*" hidden src="screenshots/favs-cloud-no-quickmenu.jpg" alt="favs as a word cloud, without the quick menu." loading="lazy" width="1080" height="2408"><figcaption><b>cloud</b> · used more, shown bigger</figcaption></figure>
-        <figure class="phone"><img data-qm="*" data-color="0" src="screenshots/favs-icons.jpg" alt="favs as monochrome icons in outlined squares." loading="lazy" width="1080" height="2408"><img data-qm="*" data-color="1" hidden src="screenshots/favs-icons-color.jpg" alt="favs as full-color icons in outlined squares." loading="lazy" width="1080" height="2408"><figcaption><b>icons</b> · a grid you can reorder</figcaption></figure>
+        <figure class="phone"><img data-qm="1" data-color="0" hidden src="screenshots/favs-az.jpg" alt="favs as a plain a to z list, with the quick menu in monochrome." loading="lazy" width="1080" height="2408"><img data-qm="1" data-color="1" hidden src="screenshots/favs-az-color-quickmenu.jpg" alt="favs as a plain a to z list, with the quick menu in full color." loading="lazy" width="1080" height="2408"><img data-qm="0" data-color="*" src="screenshots/favs-az-no-quickmenu.jpg" alt="favs as a plain a to z list, without the quick menu." loading="lazy" width="1080" height="2408"><figcaption><b>a-z</b> · A plain list, near your thumb</figcaption></figure>
+        <figure class="phone"><img data-qm="1" data-color="0" hidden src="screenshots/favs-cloud.jpg" alt="favs as a word cloud, with the quick menu in monochrome." loading="lazy" width="1080" height="2408"><img data-qm="1" data-color="1" hidden src="screenshots/favs-cloud-color-quickmenu.jpg" alt="favs as a word cloud, with the quick menu in full color." loading="lazy" width="1080" height="2408"><img data-qm="0" data-color="*" src="screenshots/favs-cloud-no-quickmenu.jpg" alt="favs as a word cloud, without the quick menu." loading="lazy" width="1080" height="2408"><figcaption><b>cloud</b> · Used more, shown bigger</figcaption></figure>
+        <figure class="phone"><img data-qm="*" data-color="0" src="screenshots/favs-icons.jpg" alt="favs as monochrome icons in outlined squares." loading="lazy" width="1080" height="2408"><img data-qm="*" data-color="1" hidden src="screenshots/favs-icons-color.jpg" alt="favs as full-color icons in outlined squares." loading="lazy" width="1080" height="2408"><figcaption><b>icons</b> · A grid you can reorder</figcaption></figure>
       </div>
-      <p style="margin-top:var(--space-12)">rather not pick your favorites yourself? switch on <i style="font-style:normal;white-space:nowrap">[x] learn by itself</i>. favs then shows the apps you opened most lately, 5 to 40 of them, your choice. apps you stop using slowly drop off, so favs keeps up as your habits change.</p>
+      <p style="margin-top:var(--space-12)">Rather not pick your favorites yourself? Switch on <i style="font-style:normal;white-space:nowrap">[x] learn by itself</i>. Favs then shows the apps you opened most lately, 5 to 40 of them, your choice. Apps you stop using slowly drop off, so favs keeps up as your habits change.</p>
     </section>
 
     <section aria-labelledby="all">
       <div class="cols" style="align-items:center">
-        <figure class="phone" style="max-width:280px"><img src="screenshots/all-icons.jpg" alt="the all screen: every app a to z, each name with a small icon in front, and a letter bar at the right edge." loading="lazy" width="1080" height="2408"></figure>
+        <figure class="phone" style="max-width:280px"><img src="screenshots/all-icons.jpg" alt="The all screen: every app a to z, each name with a small icon in front, and a letter bar at the right edge." loading="lazy" width="1080" height="2408"></figure>
         <div>
-          <h2 id="all">every app, one swipe away</h2>
-          <p>favs keep your home screen short. the rest is never far: swipe once for all your apps, a to z.</p>
-          <p>slide along the letter bar to jump to a letter. not every app has a clear name, so you can add a small icon in front of each one and spot it at a glance.</p>
+          <h2 id="all">Every app, one swipe away</h2>
+          <p>Favs keep your home screen short. The rest is never far: swipe once for all your apps, a to z.</p>
+          <p>Slide along the letter bar to jump to a letter. Not every app has a clear name, so you can add a small icon in front of each one and spot it at a glance.</p>
         </div>
       </div>
     </section>
 
     <section id="features" aria-labelledby="f">
-      <h2 id="f">what it does</h2>
+      <h2 id="f">What it does</h2>
       <div class="cols">
         <ul class="lines">
-          <li>[x] favs, all and settings, one swipe apart</li>
-          <li>[x] every app a to z, one swipe away, with a letter bar</li>
-          <li>[x] favs can fill itself with the apps you open most</li>
-          <li>[x] a quick menu row for the apps you use all the time</li>
-          <li>[x] optional notification dots: which app, never what it says</li>
-          <li>[x] icons and widgets in full color, if you prefer</li>
-          <li>[x] monospace or sans-serif, size 16 to 26</li>
-          <li>[x] follows your phone's light or dark setting</li>
-          <li>[x] no animations: taps act straight away</li>
+          <li>[x] Favs, all and settings, one swipe apart</li>
+          <li>[x] Every app a to z, one swipe away, with a letter bar</li>
+          <li>[x] Favs can fill itself with the apps you open most</li>
+          <li>[x] A quick menu row for the apps you use all the time</li>
+          <li>[x] Optional notification dots: which app, never what it says</li>
+          <li>[x] Icons and widgets in full color, if you prefer</li>
+          <li>[x] Monospace or sans-serif, size 16 to 26</li>
+          <li>[x] Follows your phone's light or dark setting</li>
+          <li>[x] No animations: taps act straight away</li>
         </ul>
         <div>
-          <p class="meta" style="margin-bottom:var(--space-4)">and, on purpose, what it does not do:</p>
+          <p class="meta" style="margin-bottom:var(--space-4)">And, on purpose, what it does not do:</p>
           <ul class="lines off">
-            <li>[ ] search</li>
-            <li>[ ] folders or hidden apps</li>
-            <li>[ ] icon packs, themes or colors</li>
-            <li>[ ] a clock or weather of its own</li>
+            <li>[ ] Search</li>
+            <li>[ ] Folders or hidden apps</li>
+            <li>[ ] Icon packs, themes or colors</li>
+            <li>[ ] A clock or weather of its own</li>
           </ul>
-          <p style="margin-top:var(--space-12)">some people find monochrome hard to read. so color is one switch away.</p>
+          <p style="margin-top:var(--space-12)">Some people find monochrome hard to read, so color is one switch away.</p>
         </div>
       </div>
     </section>
@@ -162,48 +197,63 @@
     <section aria-labelledby="w">
       <div class="cols" style="align-items:center">
         <div>
-          <h2 id="w">widgets, if you want them</h2>
-          <p>premium adds a widgets screen: a clock, the weather or your calendar, shown in black, white and gray to match, or in full color if you prefer. one purchase of € 2,99, no subscription. it works offline.</p>
-          <p class="meta">everything else in modicus is free.</p>
-          <p class="meta">the screen-time widget shown is <a href="https://play.google.com/store/apps/details?id=com.socialscap.app">socialscap</a>, also by redlimesdev.</p>
+          <h2 id="w">Widgets, if you want them</h2>
+          <p>Premium adds a widgets screen: a clock, the weather or your calendar, shown in black, white and gray to match, or in full color if you prefer. One purchase of € 2,99, no subscription. It works offline.</p>
+          <p class="meta">Everything else in modicus is free.</p>
+          <p class="meta">The screen-time widget shown is <a href="https://play.google.com/store/apps/details?id=com.socialscap.app">SocialsCap</a>, also by RedLimesDev.</p>
         </div>
         <div class="pair">
-          <figure class="phone"><img src="screenshots/widgets-mono.jpg" alt="the widgets screen in black, white and gray: clock, weather and a screen-time widget." loading="lazy" width="1080" height="2408"><figcaption><b>monochrome</b> · the default</figcaption></figure>
-          <figure class="phone"><img src="screenshots/widgets-color-mono-quickmenu.jpg" alt="the same widgets screen with the widgets in full color and the quick menu still monochrome." loading="lazy" width="1080" height="2408"><figcaption><b>full color</b> · if you prefer</figcaption></figure>
+          <figure class="phone"><img src="screenshots/widgets-mono.jpg" alt="The widgets screen in black, white and gray: clock, weather and a screen-time widget." loading="lazy" width="1080" height="2408"><figcaption><b>monochrome</b> · The default</figcaption></figure>
+          <figure class="phone"><img src="screenshots/widgets-color-mono-quickmenu.jpg" alt="The same widgets screen with the widgets in full color and the quick menu still monochrome." loading="lazy" width="1080" height="2408"><figcaption><b>full color</b> · If you prefer</figcaption></figure>
         </div>
       </div>
     </section>
 
     <section id="privacy" aria-labelledby="p">
-      <h2 id="p">nothing leaves your phone</h2>
+      <h2 id="p">Nothing leaves your phone</h2>
       <p class="big">modicus has no internet access.</p>
       <ul class="lines">
-        <li>[x] the internet permission is removed from the app</li>
-        <li>[x] no ads, no tracking, no analytics, no account</li>
-        <li>[x] favorites, settings and usage stay on your phone</li>
-        <li>[x] the only outside contact is google play, for premium</li>
+        <li>[x] The internet permission is removed from the app</li>
+        <li>[x] No ads, no tracking, no analytics, no account</li>
+        <li>[x] Favorites, settings and usage stay on your phone</li>
+        <li>[x] The only outside contact is Google Play, for premium</li>
       </ul>
-      <p style="margin-top:var(--space-6)"><a href="privacy.html">read the privacy policy</a></p>
+      <p style="margin-top:var(--space-6)"><a href="privacy.html">Read the privacy policy</a></p>
     </section>
 
     <section aria-labelledby="g">
-      <h2 id="g">getting started</h2>
-      <p>modicus works on android 10 and newer. install it, then choose it once as your default home app. you can switch back any time in android's settings, under default apps.</p>
+      <h2 id="g">Getting started</h2>
+      <p>modicus works on Android 10 and newer. Install it, then choose it once as your default home app. You can switch back any time in Android's settings, under default apps.</p>
       <a class="play" href="https://play.google.com/store/apps/details?id=com.modicus.app"><img src="google-play-badge.png" alt="Get it on Google Play" width="478" height="142"></a>
     </section>
   </main>
 
   <footer>
     <a class="brand" href="/"><img src="favicon.svg" alt="">modicus</a>
-    <span class="meta">a launcher by redlimesdev · <a href="mailto:redlimesdev@gmail.com">redlimesdev@gmail.com</a> · <a href="privacy.html">privacy</a> · © 2026</span>
+    <span class="meta">A launcher by RedLimesDev · <a href="mailto:redlimesdev@gmail.com">redlimesdev@gmail.com</a> · <a href="privacy.html">Privacy</a> · © 2026</span>
   </footer>
 </div>
 <script>
-  (function(){var st={qm:true,color:false},r=document.getElementById('favrow'),bs=document.querySelectorAll('.qm');
+  (function(){var st={qm:false,color:false},r=document.getElementById('favrow'),bs=document.querySelectorAll('.qm');
   function m(v,x){return v==='*'||v===(x?'1':'0');}
   function draw(){r.querySelectorAll('img').forEach(function(i){i.hidden=!(m(i.dataset.qm,st.qm)&&m(i.dataset.color,st.color));});}
   bs.forEach(function(b){b.addEventListener('click',function(){var k=b.dataset.key;st[k]=!st[k];b.setAttribute('aria-pressed',st[k]);
     b.textContent=(st[k]?'[x] ':'[ ] ')+b.textContent.slice(4);draw();});});draw();})();
+</script>
+<script>
+  (function(){var tr=document.querySelector('.track');if(!tr)return;var im=tr.querySelectorAll('img'),n=im.length,cap=document.querySelector('.carousel .cap'),cnt=document.querySelector('.carousel .count'),i=0,auto=null;
+  function pad(x){return (x<10?'0':'')+x;}
+  function show(k){i=(k+n)%n;tr.scrollTo({left:i*tr.clientWidth,behavior:'auto'});label();}
+  function label(){cap.textContent=im[i].dataset.cap;cnt.textContent=pad(i+1)+' / '+pad(n);}
+  tr.addEventListener('scroll',function(){var k=Math.round(tr.scrollLeft/tr.clientWidth);if(k!==i){i=k;label();}},{passive:true});
+  function stop(){if(auto){clearInterval(auto);auto=null;}}
+  ['pointerdown','wheel','touchstart','keydown'].forEach(function(e){tr.addEventListener(e,stop,{passive:true});});
+  document.querySelector('.carousel .prev').addEventListener('click',function(){stop();show(i-1);});
+  document.querySelector('.carousel .next').addEventListener('click',function(){stop();show(i+1);});
+  tr.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){e.preventDefault();show(i+1);}if(e.key==='ArrowLeft'){e.preventDefault();show(i-1);}});
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce){auto=setInterval(function(){if(!document.hidden)show(i+1);},3500);}
+  im.forEach(function(x,k){if(k<4)x.loading='eager';});})();
 </script>
 </body>
 </html>
