@@ -46,6 +46,11 @@
   .carousel figcaption { display:flex; align-items:baseline; gap:var(--space-2); margin-top:var(--space-2); font-size:14px; line-height:20px; }
   .carousel .cap { flex:1; text-align:center; color:var(--ink); }
   .carousel .count { color:var(--gray); }
+  .dots { display:none; justify-content:center; gap:2px; margin-top:var(--space-2); }
+  .dot { width:20px; height:24px; padding:0; border:0; background:none; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+  .dot::before { content:""; width:6px; height:6px; border-radius:50%; background:var(--gray); }
+  .dot[aria-current="true"]::before { background:var(--ink); }
+  .dot:focus-visible { outline:var(--stroke-outline) solid var(--ink); outline-offset:0; }
   .nav { font:inherit; color:var(--ink); background:var(--ground); border:0; padding:0; cursor:pointer; }
   .nav:hover { text-decoration:underline; text-underline-offset:4px; }
   .nav:focus-visible { outline:var(--stroke-outline) solid var(--ink); outline-offset:4px; }
@@ -86,7 +91,14 @@
     .hero { grid-template-columns:1fr; }
     .hero > div, .carousel { grid-column:auto; grid-row:auto; }
     .hero { gap:var(--space-6); padding-top:var(--space-4); }
-    .carousel { width:100%; max-width:280px; margin:0 auto; }
+    .carousel { width:100%; margin:0; }
+    .track { width:min(280px, 100%); margin:0 auto; }
+    .carousel figcaption { display:none; }
+    .dots { display:flex; }
+    .lex { margin-bottom:var(--space-6); }
+    .hero > div { display:flex; flex-direction:column; align-items:flex-start; }
+    .hero .lex { order:1; } .hero h1 { order:2; margin-bottom:0; } .hero .play { order:3; margin:var(--space-4) 0 var(--space-2); }
+    .hero .play + .meta { order:4; margin-bottom:var(--space-6); } .hero .lead { order:5; } .hero > div > p:not(.lead):not(.meta) { order:6; }
     .three { grid-template-columns:1fr; max-width:260px; }
     .cols { grid-template-columns:1fr; }
     .pair { grid-template-columns:1fr; max-width:260px; gap:var(--space-12); }
@@ -118,6 +130,7 @@
           <img src="screenshots/widgets-mono.jpg" alt="Widgets screen in black, white and gray." data-cap="widgets" width="1080" height="2408" loading="lazy">
           <img src="screenshots/widgets-color-mono-quickmenu.jpg" alt="Widgets screen in full color." data-cap="widgets · full color" width="1080" height="2408" loading="lazy">
         </div>
+        <div class="dots" aria-label="choose a screen"></div>
         <figcaption><button type="button" class="nav prev" aria-label="previous screen">[&lt;]</button><span class="cap" aria-live="polite">a-z</span><span class="count">01 / 11</span><button type="button" class="nav next" aria-label="next screen">[&gt;]</button></figcaption>
       </figure>
       <div>
@@ -238,7 +251,10 @@
   (function(){var tr=document.querySelector('.track');if(!tr)return;var im=tr.querySelectorAll('img'),n=im.length,cap=document.querySelector('.carousel .cap'),cnt=document.querySelector('.carousel .count'),i=0,auto=null;
   function pad(x){return (x<10?'0':'')+x;}
   function show(k){i=(k+n)%n;tr.scrollTo({left:i*tr.clientWidth,behavior:'auto'});label();}
-  function label(){cap.textContent=im[i].dataset.cap;cnt.textContent=pad(i+1)+' / '+pad(n);}
+  var dw=document.querySelector('.carousel .dots'),ds=[];
+  im.forEach(function(x,k){var b=document.createElement('button');b.type='button';b.className='dot';b.setAttribute('aria-label',(k+1)+': '+x.dataset.cap);b.addEventListener('click',function(){stop();show(k);});dw.appendChild(b);ds.push(b);});
+  function label(){cap.textContent=im[i].dataset.cap;cnt.textContent=pad(i+1)+' / '+pad(n);ds.forEach(function(b,k){b.setAttribute('aria-current',k===i?'true':'false');});}
+  label();
   tr.addEventListener('scroll',function(){var k=Math.round(tr.scrollLeft/tr.clientWidth);if(k!==i){i=k;label();}},{passive:true});
   function stop(){if(auto){clearInterval(auto);auto=null;}}
   ['pointerdown','wheel','touchstart','keydown'].forEach(function(e){tr.addEventListener(e,stop,{passive:true});});
