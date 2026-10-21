@@ -39,6 +39,9 @@
   .hero { display:grid; grid-template-columns:1fr 280px; gap:var(--space-12); align-items:center; padding-top:var(--space-12); }
   .lead { font-size:20px; line-height:32px; }
   .btn { display:inline-block; font:inherit; color:var(--gray); text-decoration:none; white-space:pre; margin:var(--space-6) 0 var(--space-2); }
+  .play { display:inline-block; margin:var(--space-6) 0 var(--space-2); line-height:0; }
+  .play img { height:56px; width:auto; display:block; }
+  .play:focus-visible { outline:var(--stroke-outline) solid var(--ink); outline-offset:4px; }
   .phone { margin:0; }
   .phone img { display:block; width:100%; height:auto; border:var(--stroke-outline) solid var(--ink); border-radius:var(--radius-tile); background:#000; }
   .phone figcaption { font-size:14px; line-height:20px; color:var(--gray); margin-top:var(--space-2); }
@@ -97,8 +100,8 @@
         <h1 id="t">a quiet home screen.</h1>
         <p class="lead">modicus is a home screen for android that shows your apps as plain text, in black and white. no colorful icons, no badges, no wallpaper. your phone asks for less of your attention.</p>
         <p>free to use, every feature. no ads, no subscription. only the optional widgets screen is a one-time € 2,99.</p>
-        <span class="btn" aria-disabled="true">[ coming soon to google play ]</span>
-        <p class="meta">want to know when it is out? <a href="mailto:redlimesdev@gmail.com?subject=modicus%20launch">send an email</a>.</p>
+        <a class="play" href="https://play.google.com/store/apps/details?id=com.modicus.app"><img src="google-play-badge.png" alt="Get it on Google Play" width="478" height="142"></a>
+        <p class="meta">android 10 and newer.</p>
       </div>
       <figure class="phone"><img src="screenshots/favs-cloud-no-quickmenu.jpg" alt="modicus favs as a word cloud: app names in white on black, the most-used ones larger." width="1080" height="2408"></figure>
     </section>
@@ -186,7 +189,7 @@
     <section aria-labelledby="g">
       <h2 id="g">getting started</h2>
       <p>modicus works on android 10 and newer. install it, then choose it once as your default home app. you can switch back any time in android's settings, under default apps.</p>
-      <span class="btn" aria-disabled="true">[ coming soon to google play ]</span>
+      <a class="play" href="https://play.google.com/store/apps/details?id=com.modicus.app"><img src="google-play-badge.png" alt="Get it on Google Play" width="478" height="142"></a>
     </section>
   </main>
 
