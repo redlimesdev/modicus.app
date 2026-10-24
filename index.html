@@ -275,9 +275,9 @@
       <p>Questions, bug reports or ideas? Send a message and I will reply by email.</p>
       <form id="contact-form" class="form" action="https://formspree.io/f/maeenbev" method="POST">
         <input type="hidden" name="_subject" value="modicus website">
-        <div class="hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
         <div><label for="cf-email">Your email</label><input id="cf-email" type="email" name="email" required autocomplete="email"></div>
         <div><label for="cf-message">Message</label><textarea id="cf-message" name="message" required rows="6"></textarea></div>
+        <div class="hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" data-lpignore="true" data-1p-ignore="true" data-bwignore="true" data-protonpass-ignore="true" data-form-type="other"></label></div>
         <button type="submit" id="cf-send">[ send message ]</button>
         <p class="meta" id="cf-status" role="status" aria-live="polite"></p>
         <p class="meta">Your email and message go to Formspree, a form service, which forwards them to me. I use them only to reply. See the <a href="privacy.html">privacy policy</a>.</p>
@@ -321,7 +321,8 @@
     var b=document.getElementById('cf-send'),s=document.getElementById('cf-status');
     f.addEventListener('submit',function(e){
       e.preventDefault();b.disabled=true;s.textContent='Sending';
-      fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}})
+      var data=new FormData(f);data.delete('_gotcha');
+      fetch(f.action,{method:'POST',body:data,headers:{'Accept':'application/json'}})
         .then(function(r){return r.json().catch(function(){return {};}).then(function(d){return {ok:r.ok,d:d};});})
         .then(function(x){
           if(x.ok){f.reset();s.textContent='Sent. Thank you, I will reply by email.';}
