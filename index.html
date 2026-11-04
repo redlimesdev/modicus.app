@@ -163,12 +163,14 @@
           <img src="screenshots/favs-cloud-color-quickmenu.jpg" alt="Word cloud with a full-color quick menu." data-cap="cloud · quick menu in full color" width="1080" height="2408" loading="lazy">
           <img src="screenshots/favs-icons.jpg" alt="favs as monochrome icons in outlined squares." data-cap="icons" width="1080" height="2408" loading="lazy">
           <img src="screenshots/favs-icons-color.jpg" alt="favs as full-color icons in outlined squares." data-cap="icons · full color" width="1080" height="2408" loading="lazy">
+          <img src="screenshots/groups.jpg" alt="favs as groups: car, finance, home, media, news, office, socials and travel, each with a plus sign." data-cap="groups" width="1080" height="2408" loading="lazy">
+          <img src="screenshots/groups-open.jpg" alt="The socials group opened, listing Bluesky, Facebook, Instagram, LinkedIn, Patreon and SocialsCap." data-cap="groups · one open" width="1080" height="2408" loading="lazy">
           <img src="screenshots/all-icons.jpg" alt="All apps a to z, each with a small icon, and a letter bar." data-cap="all · with small icons" width="1080" height="2408" loading="lazy">
           <img src="screenshots/widgets-mono.jpg" alt="Widgets screen in black, white and gray." data-cap="widgets" width="1080" height="2408" loading="lazy">
           <img src="screenshots/widgets-color-mono-quickmenu.jpg" alt="Widgets screen in full color." data-cap="widgets · full color" width="1080" height="2408" loading="lazy">
         </div>
         <div class="dots" aria-label="choose a screen"></div>
-        <figcaption><button type="button" class="nav prev" aria-label="previous screen">[&lt;]</button><span class="cap" aria-live="polite">a-z</span><span class="count">01 / 11</span><button type="button" class="nav next" aria-label="next screen">[&gt;]</button></figcaption>
+        <figcaption><button type="button" class="nav prev" aria-label="previous screen">[&lt;]</button><span class="cap" aria-live="polite">a-z</span><span class="count">01 / 13</span><button type="button" class="nav next" aria-label="next screen">[&gt;]</button></figcaption>
       </figure>
       <div>
         <dl class="lex" lang="la">
@@ -186,8 +188,8 @@
     </section>
 
     <section aria-labelledby="favs">
-      <h2 id="favs">Three ways to show your favorites</h2>
-      <p>Choose a-z, cloud or icons. With a-z and cloud you can add the quick menu, a row of apps at the bottom. The icons view can be monochrome or full color.</p>
+      <h2 id="favs">Four ways to show your favorites</h2>
+      <p>Choose a-z, cloud, icons or groups (just below). With a-z and cloud you can add the quick menu, a row of apps at the bottom. The icons view can be monochrome or full color.</p>
       <div class="switches" role="group" aria-label="show options">
         <button type="button" class="qm" data-key="qm" aria-pressed="false" aria-controls="favrow">[ ] quick menu</button>
         <button type="button" class="qm" data-key="color" aria-pressed="false" aria-controls="favrow">[ ] full color</button>
@@ -198,6 +200,20 @@
         <figure class="phone"><img data-qm="*" data-color="0" src="screenshots/favs-icons.jpg" alt="favs as monochrome icons in outlined squares." loading="lazy" width="1080" height="2408"><img data-qm="*" data-color="1" hidden src="screenshots/favs-icons-color.jpg" alt="favs as full-color icons in outlined squares." loading="lazy" width="1080" height="2408"><figcaption><b>icons</b> · A grid you can reorder</figcaption></figure>
       </div>
       <p style="margin-top:var(--space-12)">Rather not pick your favorites yourself? Switch on <i style="font-style:normal;white-space:nowrap">[x] learn by itself</i>. Favs then shows the apps you opened most lately, 5 to 40 of them, your choice. Apps you stop using slowly drop off, so favs keeps up as your habits change.</p>
+    </section>
+
+    <section aria-labelledby="groups">
+      <div class="cols" style="align-items:center">
+        <div>
+          <h2 id="groups">Groups, when favorites get long</h2>
+          <p>Make your own groups, such as car, finance or travel, and put the apps that belong there. Your favs screen then shows only the group names. Tap a group to open it and see its apps.</p>
+          <p class="meta">Groups are the fourth way to show your favorites, next to a-z, cloud and icons.</p>
+        </div>
+        <div class="pair">
+          <figure class="phone"><img src="screenshots/groups.jpg" alt="The favs screen in groups view: car, finance, home, media, news, office, socials and travel, each followed by a plus sign, with the quick menu at the bottom." loading="lazy" width="1080" height="2408"><figcaption><b>closed</b> · Only the group names</figcaption></figure>
+          <figure class="phone"><img src="screenshots/groups-open.jpg" alt="The same screen with the socials group open, listing Bluesky, Facebook, Instagram, LinkedIn, Patreon and SocialsCap." loading="lazy" width="1080" height="2408"><figcaption><b>open</b> · Tap a group to see its apps</figcaption></figure>
+        </div>
+      </div>
     </section>
 
     <section aria-labelledby="all">
@@ -218,6 +234,7 @@
           <li>[x] Favs, all and settings, one swipe apart</li>
           <li>[x] Every app a to z, one swipe away, with a letter bar</li>
           <li>[x] Favs can fill itself with the apps you open most</li>
+          <li>[x] Groups for your favorites, such as car, finance or travel</li>
           <li>[x] A quick menu row for the apps you use all the time</li>
           <li>[x] Optional notification dots: which app, never what it says</li>
           <li>[x] Icons and widgets in full color, if you prefer</li>
@@ -229,7 +246,7 @@
           <p class="meta" style="margin-bottom:var(--space-4)">And, on purpose, what it does not do:</p>
           <ul class="lines off">
             <li>[ ] Search</li>
-            <li>[ ] Folders or hidden apps</li>
+            <li>[ ] Hidden apps</li>
             <li>[ ] Icon packs, themes or colors</li>
             <li>[ ] A clock or weather of its own</li>
           </ul>
