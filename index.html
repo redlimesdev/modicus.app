@@ -56,7 +56,8 @@
   header { display:flex; justify-content:space-between; align-items:center; padding:var(--space-6) 0; }
   .brand { display:flex; align-items:center; gap:12px; text-decoration:none; font-size:20px; }
   .brand img { width:32px; height:32px; display:block; }
-  nav a { text-decoration:none; margin-left:var(--space-6); }
+  nav { display:flex; flex-wrap:wrap; gap:var(--space-2) var(--space-6); }
+  nav a { text-decoration:none; }
   nav a:hover { text-decoration:underline; }
   section { padding:var(--space-24) 0 0; }
   h1 { font-weight:400; font-size:56px; line-height:60px; letter-spacing:-0.5px; margin:0 0 var(--space-6); }
@@ -139,7 +140,9 @@
     .three { grid-template-columns:1fr; max-width:260px; }
     .cols { grid-template-columns:1fr; }
     .pair { grid-template-columns:1fr; max-width:260px; gap:var(--space-12); }
-    nav a { margin-left:var(--space-4); }
+    header { flex-wrap:wrap; row-gap:var(--space-2); }
+    nav { gap:0 var(--space-6); }
+    nav a { padding:var(--space-2) 0; }
     section { padding-top:72px; }
   }
 </style>
