@@ -111,6 +111,9 @@
   .pair { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-6); }
   .pair figcaption b { color:var(--ink); font-weight:400; }
   .cols { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-12); }
+  .delay { border:var(--stroke-outline) solid var(--ink); border-radius:var(--radius-tile); padding:var(--space-12) var(--space-6); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--space-6); text-align:center; min-height:260px; }
+  .delay p { margin:0; }
+  .delay .dots { color:var(--gray); }
   .big { font-size:28px; line-height:36px; margin-bottom:var(--space-6); }
   footer { margin-top:var(--space-24); padding:var(--space-12) 0; display:flex; flex-wrap:wrap; gap:var(--space-6); justify-content:space-between; align-items:center; }
   footer .brand img { width:24px; height:24px; }
@@ -185,15 +188,29 @@
         </dl>
         <h1 id="t">A quiet home screen.</h1>
         <p class="lead">modicus is a minimalist launcher for Android: a home screen that shows your apps as plain text, in black and white. No colorful icons, no badges, no wallpaper. Your phone asks for less of your attention.</p>
-        <p>Free to use. No ads, no subscription. Only the optional widgets screen is a one-time purchase of € 2,99.</p>
+        <p>Free to use. No ads, no subscription. Only the optional Premium (widgets and work profile) is a one-time purchase of € 2,99.</p>
         <a class="play" href="https://play.google.com/store/apps/details?id=com.modicus.app"><img src="google-play-badge.png" alt="Get it on Google Play" width="478" height="142"></a>
         <p class="meta">Android 10 and newer.</p>
       </div>
     </section>
 
+    <section aria-labelledby="groups">
+      <div class="cols" style="align-items:center">
+        <div>
+          <h2 id="groups">Groups: your favorites, sorted</h2>
+          <p>Make your own groups, such as car, finance or travel, and put the apps that belong there. Your favs screen then shows only the group names. Tap a group to open it and see its apps. Hold any app to move it to another group or to start a new one.</p>
+          <p class="meta">Groups are the first of four ways to show your favorites. The other three follow below.</p>
+        </div>
+        <div class="pair">
+          <figure class="phone"><img src="screenshots/groups.jpg" alt="The favs screen in groups view: car, finance, home, media, news, office, socials and travel, each followed by a plus sign, with the quick menu at the bottom." loading="lazy" width="1080" height="2408"><figcaption><b>closed</b> · Only the group names</figcaption></figure>
+          <figure class="phone"><img src="screenshots/groups-open.jpg" alt="The same screen with the socials group open, listing Bluesky, Facebook, Instagram, LinkedIn, Patreon and SocialsCap." loading="lazy" width="1080" height="2408"><figcaption><b>open</b> · Tap a group to see its apps</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
     <section aria-labelledby="favs">
       <h2 id="favs">Four ways to show your favorites</h2>
-      <p>Choose a-z, cloud, icons or groups (just below). With a-z and cloud you can add the quick menu, a row of apps at the bottom. The icons view can be monochrome or full color.</p>
+      <p>Choose groups, a-z, cloud or icons. The quick menu, a row of apps at the bottom, is optional. Icons can be monochrome or full color. Use the switches to see the difference.</p>
       <div class="switches" role="group" aria-label="show options">
         <button type="button" class="qm" data-key="qm" aria-pressed="false" aria-controls="favrow">[ ] quick menu</button>
         <button type="button" class="qm" data-key="color" aria-pressed="false" aria-controls="favrow">[ ] full color</button>
@@ -204,21 +221,7 @@
         <figure class="phone"><img data-qm="1" data-color="0" hidden src="screenshots/favs-cloud.jpg" alt="favs as a word cloud, with the quick menu in monochrome." loading="lazy" width="1080" height="2408"><img data-qm="1" data-color="1" hidden src="screenshots/favs-cloud-color-quickmenu.jpg" alt="favs as a word cloud, with the quick menu in full color." loading="lazy" width="1080" height="2408"><img data-qm="0" data-color="*" src="screenshots/favs-cloud-no-quickmenu.jpg" alt="favs as a word cloud, without the quick menu." loading="lazy" width="1080" height="2408"><figcaption><b>cloud</b> · Used more, shown bigger</figcaption></figure>
         <figure class="phone"><img data-qm="*" data-color="0" src="screenshots/favs-icons.jpg" alt="favs as monochrome icons in outlined squares." loading="lazy" width="1080" height="2408"><img data-qm="*" data-color="1" hidden src="screenshots/favs-icons-color.jpg" alt="favs as full-color icons in outlined squares." loading="lazy" width="1080" height="2408"><figcaption><b>icons</b> · A grid you can reorder</figcaption></figure>
       </div>
-      <p style="margin-top:var(--space-12)">Rather not pick your favorites yourself? Switch on <i style="font-style:normal;white-space:nowrap">[x] learn by itself</i>. Favs then shows the apps you opened most lately, 5 to 40 of them, your choice. Apps you stop using slowly drop off, so favs keeps up as your habits change.</p>
-    </section>
-
-    <section aria-labelledby="groups">
-      <div class="cols" style="align-items:center">
-        <div>
-          <h2 id="groups">Groups, when favorites get long</h2>
-          <p>Make your own groups, such as car, finance or travel, and put the apps that belong there. Your favs screen then shows only the group names. Tap a group to open it and see its apps.</p>
-          <p class="meta">Groups are the fourth way to show your favorites, next to a-z, cloud and icons.</p>
-        </div>
-        <div class="pair">
-          <figure class="phone"><img src="screenshots/groups.jpg" alt="The favs screen in groups view: car, finance, home, media, news, office, socials and travel, each followed by a plus sign, with the quick menu at the bottom." loading="lazy" width="1080" height="2408"><figcaption><b>closed</b> · Only the group names</figcaption></figure>
-          <figure class="phone"><img src="screenshots/groups-open.jpg" alt="The same screen with the socials group open, listing Bluesky, Facebook, Instagram, LinkedIn, Patreon and SocialsCap." loading="lazy" width="1080" height="2408"><figcaption><b>open</b> · Tap a group to see its apps</figcaption></figure>
-        </div>
-      </div>
+      <p style="margin-top:var(--space-12)">Rather not pick your favorites yourself? Switch on <i style="font-style:normal;white-space:nowrap">[x] learn by itself</i>. Favs then shows the apps you opened most lately, 5 to 40 of them, your choice. Apps you stop using slowly drop off, so favs keeps up as your habits change. With groups, your groups stay as you made them and only the apps below them learn by themselves.</p>
     </section>
 
     <section aria-labelledby="all">
@@ -232,20 +235,39 @@
       </div>
     </section>
 
+    <section aria-labelledby="d">
+      <div class="cols" style="align-items:center">
+        <div>
+          <h2 id="d">Distracting apps, a pause first</h2>
+          <p>Some apps pull you in. Hold an app and tick "distracting". When you open it, modicus first shows a quiet screen with a gray dot for every second left. You choose the pause, from 1 to 30 seconds.</p>
+          <p>When the dots are gone, tap "open" to continue. Tap "abort", press Back or Home, and the app stays closed. You can always still open it, but only after a calm moment and a deliberate tap.</p>
+          <p class="meta">To take an app off the list, use settings. Holding it no longer shows "distracting", so it is not too easy to undo in a weak moment.</p>
+        </div>
+        <div class="delay" role="img" aria-label="The delay screen: distracting app delay active, a row of gray dots, one for every second left, and abort below.">
+          <p>distracting app delay active</p>
+          <p class="dots">• • • • • • •</p>
+          <p>[&lt;] abort</p>
+        </div>
+      </div>
+    </section>
+
     <section id="features" aria-labelledby="f">
       <h2 id="f">What it does</h2>
       <div class="cols">
         <ul class="lines">
+          <li>[x] Groups for your favorites, such as car, finance or travel</li>
           <li>[x] Favs, all and settings, one swipe apart</li>
           <li>[x] Every app a to z, one swipe away, with a letter bar</li>
           <li>[x] Favs can fill itself with the apps you open most</li>
-          <li>[x] Groups for your favorites, such as car, finance or travel</li>
           <li>[x] A quick menu row for the apps you use all the time</li>
+          <li>[x] Distracting apps wait a few seconds before they open</li>
+          <li>[x] Hold an app to rename it, see its shortcuts or uninstall it</li>
           <li>[x] Optional notification dots: which app, never what it says</li>
           <li>[x] Icons and widgets in full color, if you prefer</li>
-          <li>[x] Monospace or sans-serif, size 16 to 26</li>
+          <li>[x] Monospace or sans-serif, size 16 to 26, bigger for favs</li>
           <li>[x] Follows your phone's light or dark setting</li>
           <li>[x] No animations: taps act straight away</li>
+          <li>[x] Backup: save your settings to a file, load them on a new phone</li>
         </ul>
         <div>
           <p class="meta" style="margin-bottom:var(--space-4)">And, on purpose, what it does not do:</p>
@@ -263,8 +285,9 @@
     <section aria-labelledby="w">
       <div class="cols" style="align-items:center">
         <div>
-          <h2 id="w">Widgets, if you want them</h2>
-          <p>Premium adds a widgets screen: a clock, the weather or your calendar, shown in black, white and gray to match, or in full color if you prefer. One purchase of € 2,99, no subscription. It works offline.</p>
+          <h2 id="w">Premium: widgets and work profile</h2>
+          <p>Premium adds a widgets screen: a clock, the weather or your calendar, shown in black, white and gray to match, or in full color if you prefer. You can choose widgets or favs as your start screen.</p>
+          <p>If your phone has a work profile, favs gets a private and a work tab, and you can pause your work apps after hours. One purchase of € 2,99, no subscription. It works offline.</p>
           <p class="meta">Everything else in modicus is free.</p>
           <p class="meta">The screen-time widget shown is <a href="https://play.google.com/store/apps/details?id=com.socialscap.app">SocialsCap</a>, also by RedLimesDev.</p>
         </div>
@@ -282,6 +305,7 @@
         <li>[x] The internet permission is removed from the app</li>
         <li>[x] No ads, no tracking, no analytics, no account</li>
         <li>[x] Favorites, settings and usage stay on your phone</li>
+        <li>[x] A backup file is only made when you ask for one</li>
         <li>[x] The only outside contact is Google Play, for premium</li>
       </ul>
       <p style="margin-top:var(--space-6)"><a href="privacy.html">Read the privacy policy</a></p>
