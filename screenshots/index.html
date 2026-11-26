@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>modicus · A quiet minimalist launcher for Android</title>
+<meta name="description" content="modicus is a minimalist Android launcher that shows your apps as plain text, in black and white. No ads, no tracking, no internet access.">
+<meta name="color-scheme" content="dark light">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="modicus">
+<meta property="og:title" content="modicus · A quiet minimalist launcher for Android">
+<meta property="og:description" content="A minimalist Android launcher: your apps as plain text, in black and white. No ads, no tracking, no internet access.">
+<meta property="og:url" content="https://modicus.app/">
+<meta property="og:image" content="https://modicus.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="modicus: a quiet home screen.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://modicus.app/">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "modicus",
+  "alternateName": "Modicus",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Android 10 or newer",
+  "description": "modicus is a minimalist Android launcher that shows your apps as plain text, in black and white. No ads, no tracking, no internet access.",
+  "url": "https://modicus.app/",
+  "image": "https://modicus.app/og-image.png",
+  "downloadUrl": "https://play.google.com/store/apps/details?id=com.modicus.app",
+  "publisher": { "@type": "Organization", "name": "PBLIZ! B.V." },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+}
+</script>
+<link rel="preload" href="fonts/noto-sans-mono-latin-400.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  @font-face { font-family:"Noto Sans Mono"; font-style:normal; font-weight:400; font-display:swap;
+    src:url(fonts/noto-sans-mono-latin-ext-400.woff2) format("woff2");
+    unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+  @font-face { font-family:"Noto Sans Mono"; font-style:normal; font-weight:400; font-display:swap;
+    src:url(fonts/noto-sans-mono-latin-400.woff2) format("woff2");
+    unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+  :root { --ground:#000; --ink:#fff; --gray:#767676; --font-mono:"Noto Sans Mono","Droid Sans Mono",ui-monospace,monospace;
+          --space-2:8px; --space-4:16px; --space-6:24px; --space-12:48px; --space-24:96px; --radius-tile:12px; --stroke-outline:2px; }
+  @media (prefers-color-scheme: light) { :root { --ground:#fff; --ink:#000; } }
+  * { box-sizing:border-box; transition:none !important; animation:none !important; }
+  html { background:var(--ground); }
+  body { margin:0; background:var(--ground); color:var(--ink); font-family:var(--font-mono); font-size:18px; line-height:28px; -webkit-font-smoothing:antialiased; }
+  a { color:var(--ink); text-underline-offset:4px; }
+  a:focus-visible, .btn:focus-visible { outline:var(--stroke-outline) solid var(--ink); outline-offset:4px; }
+  .wrap { max-width:1040px; margin:0 auto; padding:0 var(--space-6); }
+  header { display:flex; justify-content:space-between; align-items:center; padding:var(--space-6) 0; }
+  .brand { display:flex; align-items:center; gap:12px; text-decoration:none; font-size:20px; }
+  .brand img { width:32px; height:32px; display:block; }
+  nav { display:flex; flex-wrap:wrap; gap:var(--space-2) var(--space-6); }
+  nav a { text-decoration:none; }
+  nav a:hover { text-decoration:underline; }
+  section { padding:var(--space-24) 0 0; }
+  h1 { font-weight:400; font-size:56px; line-height:60px; letter-spacing:-0.5px; margin:0 0 var(--space-6); }
+  h2 { font-weight:400; font-size:28px; line-height:36px; margin:0 0 var(--space-6); }
+  p { margin:0 0 var(--space-4); max-width:60ch; }
+  .meta { font-size:14px; line-height:20px; color:var(--gray); }
+  .hero { display:grid; grid-template-columns:1fr 280px; gap:var(--space-12); align-items:center; padding-top:var(--space-12); }
+  .hero > div { grid-column:1; grid-row:1; }
+  .carousel { grid-column:2; grid-row:1; margin:0; }
+  .track { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; scroll-behavior:auto; scrollbar-width:none; border:var(--stroke-outline) solid var(--ink); border-radius:var(--radius-tile); background:#000; }
+  .track::-webkit-scrollbar { display:none; }
+  .track:focus-visible { outline:var(--stroke-outline) solid var(--ink); outline-offset:4px; }
+  .track img, .track video { flex:0 0 100%; width:100%; height:auto; display:block; scroll-snap-align:start; }
+  .carousel figcaption { display:flex; align-items:baseline; gap:var(--space-2); margin-top:var(--space-2); font-size:14px; line-height:20px; }
+  .carousel .cap { flex:1; text-align:center; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .carousel .count { color:var(--gray); }
+  .dots { display:none; justify-content:center; gap:2px; margin-top:var(--space-2); }
+  .dot { width:20px; height:24px; padding:0; border:0; background:none; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+  .dot::before { content:""; width:6px; height:6px; border-radius:50%; background:var(--gray); }
+  .dot[aria-current="true"]::before { background:var(--ink); }
+  .dot:focus-visible { outline:var(--stroke-outline) solid var(--ink); outline-offset:0; }
+  .nav { font:inherit; color:var(--ink); background:var(--ground); border:0; padding:0; cursor:pointer; }
+  .nav:hover { text-decoration:underline; text-underline-offset:4px; }
+  .nav:focus-visible { outline:var(--stroke-outline) solid var(--ink); outline-offset:4px; }
+  .lead { font-size:20px; line-height:32px; }
+  .btn { display:inline-block; font:inherit; color:var(--gray); text-decoration:none; white-space:pre; margin:var(--space-6) 0 var(--space-2); }
+  .play { display:inline-block; margin:var(--space-6) 0 var(--space-2); line-height:0; }
+  .play img { height:56px; width:auto; display:block; }
+  .play:focus-visible { outline:var(--stroke-outline) solid var(--ink); outline-offset:4px; }
+  .phone { margin:0; }
+  .phone img { display:block; width:100%; height:auto; border:var(--stroke-outline) solid var(--ink); border-radius:var(--radius-tile); background:#000; }
+  .phone figcaption { font-size:14px; line-height:20px; color:var(--gray); margin-top:var(--space-2); }
+  .three { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-6); }
+  .three figcaption b { color:var(--ink); font-weight:400; }
+  .lines { list-style:none; padding:0; margin:0; }
+  .lines li { white-space:pre-wrap; padding-left:4ch; text-indent:-4ch; margin-bottom:var(--space-2); }
+  .lines.off li { color:var(--gray); }
+  .qm { font:inherit; color:var(--ink); background:var(--ground); border:0; padding:0; margin:0; cursor:pointer; text-align:left; white-space:pre; }
+  .lex { margin:0 0 var(--space-12); font-size:14px; line-height:22px; }
+  .lex dt { margin:0 0 var(--space-2); }
+  .lex .w { font-size:18px; color:var(--ink); }
+  .lex .ipa, .lex .pos { color:var(--gray); margin-left:1ch; white-space:nowrap; }
+  .lex dd { margin:0; padding-left:2ch; }
+  .lex .ety { color:var(--gray); margin-top:var(--space-2); }
+  .lex i { font-style:normal; color:var(--ink); }
+  .switches { display:flex; flex-direction:column; gap:var(--space-2); margin:var(--space-6) 0 var(--space-12); }
+  .qm:hover { text-decoration:underline; text-underline-offset:4px; }
+  .qm:focus-visible { outline:var(--stroke-outline) solid var(--ink); outline-offset:4px; }
+  .phone video { display:block; width:100%; height:auto; border:var(--stroke-outline) solid var(--ink); border-radius:var(--radius-tile); background:#000; }
+  .phone img[hidden] { display:none; }
+  .pair { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-6); }
+  .pair figcaption b { color:var(--ink); font-weight:400; }
+  .cols { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-12); }
+  .delay { border:var(--stroke-outline) solid var(--ink); border-radius:var(--radius-tile); padding:var(--space-12) var(--space-6); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--space-6); text-align:center; min-height:260px; }
+  .delay p { margin:0; }
+  .delay .dots { color:var(--gray); }
+  .big { font-size:28px; line-height:36px; margin-bottom:var(--space-6); }
+  footer { margin-top:var(--space-24); padding:var(--space-12) 0; display:flex; flex-wrap:wrap; gap:var(--space-6); justify-content:space-between; align-items:center; }
+  footer .brand img { width:24px; height:24px; }
+  .form { display:flex; flex-direction:column; gap:var(--space-6); max-width:60ch; margin-top:var(--space-6); }
+  .form label { display:block; font-size:14px; line-height:20px; color:var(--gray); margin-bottom:var(--space-2); }
+  .form input[type="email"], .form textarea { width:100%; font:inherit; color:var(--ink); background:var(--ground); border:var(--stroke-outline) solid var(--ink); border-radius:var(--radius-tile); padding:12px var(--space-4); }
+  .form textarea { min-height:168px; resize:vertical; }
+  .form input:focus-visible, .form textarea:focus-visible, .form button:focus-visible { outline:var(--stroke-outline) solid var(--ink); outline-offset:4px; }
+  .form button { align-self:flex-start; font:inherit; color:var(--ink); background:var(--ground); border:0; padding:0; cursor:pointer; white-space:pre; }
+  .form button:hover { text-decoration:underline; text-underline-offset:4px; }
+  .form button:disabled { color:var(--gray); cursor:default; text-decoration:none; }
+  .form p { margin:0; }
+  .hp { position:absolute; left:-10000px; width:1px; height:1px; overflow:hidden; }
+  @media (max-width:760px) {
+    .wrap { padding:0 var(--space-4); }
+    h1 { font-size:36px; line-height:42px; }
+    .hero { grid-template-columns:1fr; }
+    .hero > div, .carousel { grid-column:auto; grid-row:auto; }
+    .hero { gap:var(--space-6); padding-top:var(--space-4); }
+    .carousel { width:100%; margin:0; }
+    .track { width:min(280px, 100%); margin:0 auto; }
+    .carousel figcaption { display:none; }
+    .dots { display:flex; }
+    .lex { margin-bottom:var(--space-6); }
+    .hero > div { display:flex; flex-direction:column; align-items:flex-start; }
+    .hero .lex { order:1; } .hero h1 { order:2; margin-bottom:0; } .hero .play { order:3; margin:var(--space-4) 0 var(--space-2); }
+    .hero .play + .meta { order:4; margin-bottom:var(--space-6); } .hero .lead { order:5; } .hero > div > p:not(.lead):not(.meta) { order:6; }
+    .three { grid-template-columns:1fr; max-width:260px; gap:var(--space-12); }
+    .cols { grid-template-columns:1fr; }
+    .pair { grid-template-columns:1fr; max-width:260px; gap:var(--space-12); }
+    header { flex-wrap:wrap; row-gap:var(--space-2); }
+    nav { gap:0 var(--space-6); }
+    nav a { padding:var(--space-2) 0; }
+    section { padding-top:72px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="/"><img src="favicon.svg" alt="">modicus</a>
+    <nav><a href="#features">Features</a><a href="#privacy">Privacy</a><a href="#contact">Contact</a></nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="t">
+      <figure class="carousel" aria-roledescription="carousel" aria-label="modicus screens">
+        <div class="track" tabindex="0">
+          <video muted loop playsinline preload="auto" poster="screenshots/modicus_groups_poster.jpg" data-cap="groups" width="540" height="1204" aria-label="favs as groups: tap the socials group and it opens to show its apps, Bluesky, Facebook, Instagram, Patreon and Substack."><source src="screenshots/modicus_groups.webm" type="video/webm"><source src="screenshots/modicus_groups.mp4" type="video/mp4"></video>
+          <img src="screenshots/modicus_cloud_qm_mc.jpg" alt="favs as a word cloud, most-used apps larger, with the quick menu at the bottom." data-cap="cloud" width="1080" height="2408" loading="lazy">
+          <img src="screenshots/modicus_icons_qm_mc.jpg" alt="favs as monochrome icons in outlined squares, with the quick menu at the bottom." data-cap="icons" width="1080" height="2408" loading="lazy">
+          <img src="screenshots/modicus_all_qm_mc.png" alt="All apps a to z, each with a small icon, and a letter bar." data-cap="all" width="720" height="1600" loading="lazy">
+        </div>
+        <div class="dots" aria-label="choose a screen"></div>
+        <figcaption><button type="button" class="nav prev" aria-label="previous screen">[&lt;]</button><span class="cap" aria-live="polite">groups</span><span class="count">01 / 04</span><button type="button" class="nav next" aria-label="next screen">[&gt;]</button></figcaption>
+      </figure>
+      <div>
+        <dl class="lex" lang="la">
+          <dt><span class="w">mo·di·cus</span> <span class="ipa" lang="">/ˈmɔ.dɪ.kʊs/</span> <span class="pos" lang="en">Latin, adjective</span></dt>
+          <dd lang="en">1. moderate, of measured size</dd>
+          <dd lang="en">2. modest, restrained</dd>
+          <dd class="ety" lang="en">From <i>modus</i>, measure. The same root gives English <i>modicum</i>: a small amount.</dd>
+        </dl>
+        <h1 id="t">A quiet home screen.</h1>
+        <p class="lead">modicus is a minimalist launcher for Android: a home screen that shows your apps as plain text, in black and white. No colorful icons, no badges, no wallpaper. Your phone asks for less of your attention.</p>
+        <p>Free to use. No ads, no subscription. Only the optional Premium (widgets and work profile) is a one-time purchase of € 2,99.</p>
+        <a class="play" href="https://play.google.com/store/apps/details?id=com.modicus.app"><img src="google-play-badge.png" alt="Get it on Google Play" width="478" height="142"></a>
+        <p class="meta">Android 10 and newer.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="groups">
+      <div class="cols" style="align-items:center">
+        <div>
+          <h2 id="groups">Groups: your favorites, sorted</h2>
+          <p>Make your own groups, such as car, finance or travel, and put the apps that belong there. Your favs screen then shows only the group names. Tap a group to open it and see its apps. Hold any app to move it to another group or to start a new one.</p>
+          <p class="meta">Groups are the first of three ways to show your favorites, next to cloud and icons. Until you make a group, favs is a plain a to z list.</p>
+        </div>
+        <div class="pair">
+          <figure class="phone"><img src="screenshots/modicus_groups.jpg" alt="The favs screen in groups view: ai, car, finance, home, media, news, shopping, socials and travel, each with a plus sign, and a star for the rest." width="1080" height="2408" loading="lazy"><figcaption><b>closed</b> · Only the group names</figcaption></figure>
+          <figure class="phone"><img src="screenshots/modicus_groups-open.jpg" alt="The same screen with the socials group open, listing Bluesky, Facebook, Instagram, Patreon, Substack and UpScrolled." width="1080" height="2408" loading="lazy"><figcaption><b>open</b> · Tap a group to see its apps</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="favs">
+      <h2 id="favs">Three ways to show your favorites</h2>
+      <p>Choose groups, cloud or icons. The quick menu, a row of apps at the bottom, is optional and can be monochrome or full color. Use the switches to see the difference.</p>
+      <div class="switches" role="group" aria-label="show options">
+        <button type="button" class="qm" data-key="qm" aria-pressed="false" aria-controls="favrow">[ ] quick menu</button>
+        <button type="button" class="qm" data-key="color" aria-pressed="false" aria-controls="favrow">[ ] full color</button>
+      </div>
+      <div class="three" id="favrow">
+        <figure class="phone"><img data-qm="1" data-color="0" hidden src="screenshots/modicus_az_groups_qm_mc.jpg" alt="favs as groups, with the quick menu in monochrome." width="1080" height="2408" loading="lazy"><img data-qm="1" data-color="1" hidden src="screenshots/modicus_az_groups_qm_fc.jpg" alt="favs as groups, with the quick menu in full color." width="1080" height="2408" loading="lazy"><img data-qm="0" data-color="*" src="screenshots/modicus_groups.jpg" alt="favs as groups: ai, car, finance, home, media, news, shopping, socials and travel, each with a plus sign, and a star for the rest, without the quick menu." width="1080" height="2408" loading="lazy"><figcaption><b>groups</b> · Tap a group to open it</figcaption></figure>
+        <figure class="phone"><img data-qm="1" data-color="0" hidden src="screenshots/modicus_cloud_qm_mc.jpg" alt="favs as a word cloud, with the quick menu in monochrome." width="1080" height="2408" loading="lazy"><img data-qm="1" data-color="1" hidden src="screenshots/modicus_cloud_qm_fc.jpg" alt="favs as a word cloud, with the quick menu in full color." width="1080" height="2408" loading="lazy"><img data-qm="0" data-color="*" src="screenshots/modicus_cloud.jpg" alt="favs as a word cloud, without the quick menu." width="1080" height="2408" loading="lazy"><figcaption><b>cloud</b> · Used more, shown bigger</figcaption></figure>
+        <figure class="phone"><img data-qm="1" data-color="0" hidden src="screenshots/modicus_icons_qm_mc.jpg" alt="favs as monochrome icons in outlined squares, with the quick menu in monochrome." width="1080" height="2408" loading="lazy"><img data-qm="1" data-color="1" hidden src="screenshots/modicus_icons_qm_fc.jpg" alt="favs as monochrome icons in outlined squares, with the quick menu in full color." width="1080" height="2408" loading="lazy"><img data-qm="0" data-color="*" src="screenshots/modicus_icons_mc.jpg" alt="favs as monochrome icons in outlined squares, without the quick menu." width="1080" height="2408" loading="lazy"><figcaption><b>icons</b> · A grid you can reorder</figcaption></figure>
+      </div>
+      <p style="margin-top:var(--space-12)">Rather not pick your favorites yourself? Switch on <i style="font-style:normal;white-space:nowrap">[x] learn by itself</i>. Favs then shows the apps you opened most lately, 5 to 40 of them, your choice. Apps you stop using slowly drop off, so favs keeps up as your habits change. With groups, your groups stay as you made them and only the apps below them learn by themselves.</p>
+    </section>
+
+    <section aria-labelledby="all">
+      <div class="cols" style="align-items:center">
+        <figure class="phone" style="max-width:280px"><video id="allvid" muted loop playsinline preload="metadata" poster="screenshots/modicus_all_poster.jpg" width="540" height="1204" aria-label="The all screen: sliding a finger along the letter bar jumps through the apps, a to z, while the chosen letter shows large in the middle."><source src="screenshots/modicus_all.webm" type="video/webm"><source src="screenshots/modicus_all.mp4" type="video/mp4"></video></figure>
+        <div>
+          <h2 id="all">Every app, one swipe away</h2>
+          <p>Favs keep your home screen short. The rest is never far: swipe once for all your apps, a to z.</p>
+          <p>Slide along the letter bar to jump to a letter. Not every app has a clear name, so you can add a small icon in front of each one and spot it at a glance.</p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="d">
+      <div class="cols" style="align-items:center">
+        <div>
+          <h2 id="d">Distracting apps, a pause first</h2>
+          <p>Some apps pull you in. Hold an app and tick "distracting". When you open it, modicus first shows a quiet screen with a gray dot for every second left. You choose the pause, from 1 to 30 seconds.</p>
+          <p>When the dots are gone, tap "open" to continue. Tap "abort", press Back or Home, and the app stays closed. You can always still open it, but only after a calm moment and a deliberate tap.</p>
+          <p class="meta">To take an app off the list, use settings. Holding it no longer shows "distracting", so it is not too easy to undo in a weak moment.</p>
+        </div>
+        <div class="delay" role="img" aria-label="The delay screen: distracting app delay active, a row of gray dots, one for every second left, and abort below.">
+          <p>distracting app delay active</p>
+          <p class="dots">• • • • • • •</p>
+          <p>[&lt;] abort</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" aria-labelledby="f">
+      <h2 id="f">What it does</h2>
+      <div class="cols">
+        <ul class="lines">
+          <li>[x] Groups for your favorites, such as car, finance or travel, or a plain a to z list</li>
+          <li>[x] Favs, all and settings, one swipe apart</li>
+          <li>[x] Every app a to z, one swipe away, with a letter bar</li>
+          <li>[x] Favs can fill itself with the apps you open most</li>
+          <li>[x] A quick menu row for the apps you use all the time</li>
+          <li>[x] Distracting apps wait a few seconds before they open</li>
+          <li>[x] Hold an app to rename it, see its shortcuts or uninstall it</li>
+          <li>[x] Optional notification dots: which app, never what it says</li>
+          <li>[x] Icons and widgets in full color, if you prefer</li>
+          <li>[x] Monospace or sans-serif, size 16 to 26, bigger for favs</li>
+          <li>[x] Follows your phone's light or dark setting</li>
+          <li>[x] No animations: taps act straight away</li>
+          <li>[x] Backup: save your settings to a file, load them on a new phone</li>
+        </ul>
+        <div>
+          <p class="meta" style="margin-bottom:var(--space-4)">And, on purpose, what it does not do:</p>
+          <ul class="lines off">
+            <li>[ ] Search</li>
+            <li>[ ] Hidden apps</li>
+            <li>[ ] Icon packs, themes or colors</li>
+            <li>[ ] A clock or weather of its own</li>
+          </ul>
+          <p style="margin-top:var(--space-12)">Some people find monochrome hard to read, so color is one switch away.</p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="w">
+      <div class="cols" style="align-items:center">
+        <div>
+          <h2 id="w">Premium: widgets and work profile</h2>
+          <p>Premium adds a widgets screen: a clock, the weather or your calendar, shown in black, white and gray to match, or in full color if you prefer. You can choose widgets or favs as your start screen.</p>
+          <p>If your phone has a work profile, favs gets a private and a work tab, and you can pause your work apps after hours. One purchase of € 2,99, no subscription. It works offline.</p>
+          <p class="meta">Everything else in modicus is free.</p>
+          <p class="meta">The screen-time widget shown is <a href="https://play.google.com/store/apps/details?id=com.socialscap.app">SocialsCap</a>, also by RedLimesDev.</p>
+        </div>
+        <div class="pair">
+          <figure class="phone"><img src="screenshots/widgets-mono.jpg" alt="The widgets screen in black, white and gray: clock, weather and a screen-time widget." loading="lazy" width="1080" height="2408"><figcaption><b>monochrome</b> · The default</figcaption></figure>
+          <figure class="phone"><img src="screenshots/widgets-color-mono-quickmenu.jpg" alt="The same widgets screen with the widgets in full color and the quick menu still monochrome." loading="lazy" width="1080" height="2408"><figcaption><b>full color</b> · If you prefer</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="privacy" aria-labelledby="p">
+      <h2 id="p">Nothing leaves your phone</h2>
+      <p class="big">modicus has no internet access.</p>
+      <ul class="lines">
+        <li>[x] The internet permission is removed from the app</li>
+        <li>[x] No ads, no tracking, no analytics, no account</li>
+        <li>[x] Favorites, settings and usage stay on your phone</li>
+        <li>[x] A backup file is only made when you ask for one</li>
+        <li>[x] The only outside contact is Google Play, for premium</li>
+      </ul>
+      <p style="margin-top:var(--space-6)"><a href="privacy.html">Read the privacy policy</a></p>
+    </section>
+
+    <section aria-labelledby="g">
+      <h2 id="g">Getting started</h2>
+      <p>modicus works on Android 10 and newer. Install it, then choose it once as your default home app. You can switch back any time in Android's settings, under default apps.</p>
+      <a class="play" href="https://play.google.com/store/apps/details?id=com.modicus.app"><img src="google-play-badge.png" alt="Get it on Google Play" width="478" height="142"></a>
+    </section>
+    <section id="contact" aria-labelledby="c">
+      <h2 id="c">Contact</h2>
+      <p>Questions, bug reports or ideas? Send a message and I will reply by email.</p>
+      <form id="contact-form" class="form" action="https://formspree.io/f/maeenbev" method="POST">
+        <input type="hidden" name="_subject" value="modicus website">
+        <div><label for="cf-email">Your email</label><input id="cf-email" type="email" name="email" required autocomplete="email"></div>
+        <div><label for="cf-message">Message</label><textarea id="cf-message" name="message" required rows="6"></textarea></div>
+        <div class="hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" data-lpignore="true" data-1p-ignore="true" data-bwignore="true" data-protonpass-ignore="true" data-form-type="other"></label></div>
+        <button type="submit" id="cf-send">[ send message ]</button>
+        <p class="meta" id="cf-status" role="status" aria-live="polite"></p>
+        <p class="meta">Your email and message go to Formspree, a form service, which forwards them to me. I use them only to reply. See the <a href="privacy.html">privacy policy</a>.</p>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <a class="brand" href="/"><img src="favicon.svg" alt="">modicus</a>
+    <span class="meta">A launcher by RedLimesDev, published by PBLIZ! B.V. · <a href="#contact">Contact</a> · <a href="privacy.html">Privacy</a> · © 2026</span>
+  </footer>
+</div>
+<script>
+  (function(){var v=document.getElementById('allvid');if(!v)return;
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce||!('IntersectionObserver' in window))return;
+  new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var p=v.play();if(p&&p.catch)p.catch(function(){});}else{v.pause();}});},{threshold:0.4}).observe(v);})();
+</script>
+<script>
+  (function(){var st={qm:false,color:false},r=document.getElementById('favrow'),bs=document.querySelectorAll('.qm');
+  function m(v,x){return v==='*'||v===(x?'1':'0');}
+  function draw(){r.querySelectorAll('img').forEach(function(i){i.hidden=!(m(i.dataset.qm,st.qm)&&m(i.dataset.color,st.color));});}
+  bs.forEach(function(b){b.addEventListener('click',function(){var k=b.dataset.key;st[k]=!st[k];b.setAttribute('aria-pressed',st[k]);
+    b.textContent=(st[k]?'[x] ':'[ ] ')+b.textContent.slice(4);draw();});});draw();})();
+</script>
+<script>
+  (function(){var tr=document.querySelector('.track');if(!tr)return;var im=tr.children,n=im.length,cap=document.querySelector('.carousel .cap'),cnt=document.querySelector('.carousel .count'),i=0,auto=null;
+  function pad(x){return (x<10?'0':'')+x;}
+  function show(k){i=(k+n)%n;tr.scrollTo({left:i*tr.clientWidth,behavior:'auto'});label();}
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function vids(){Array.prototype.forEach.call(im,function(x,k){if(x.tagName!=='VIDEO')return;if(k===i&&!reduce){x.currentTime=0;var p=x.play();if(p&&p.catch)p.catch(function(){});}else{x.pause();}});}
+  var dw=document.querySelector('.carousel .dots'),ds=[];
+  Array.prototype.forEach.call(im,function(x,k){var b=document.createElement('button');b.type='button';b.className='dot';b.setAttribute('aria-label',(k+1)+': '+x.dataset.cap);b.addEventListener('click',function(){stop();show(k);});dw.appendChild(b);ds.push(b);});
+  function label(){vids();cap.textContent=im[i].dataset.cap;cnt.textContent=pad(i+1)+' / '+pad(n);ds.forEach(function(b,k){b.setAttribute('aria-current',k===i?'true':'false');});}
+  label();
+  tr.addEventListener('scroll',function(){var k=Math.round(tr.scrollLeft/tr.clientWidth);if(k!==i){i=k;label();}},{passive:true});
+  function stop(){if(auto){clearTimeout(auto);auto=null;}}
+  ['pointerdown','wheel','touchstart','keydown'].forEach(function(e){tr.addEventListener(e,stop,{passive:true});});
+  document.querySelector('.carousel .prev').addEventListener('click',function(){stop();show(i-1);});
+  document.querySelector('.carousel .next').addEventListener('click',function(){stop();show(i+1);});
+  tr.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){e.preventDefault();show(i+1);}if(e.key==='ArrowLeft'){e.preventDefault();show(i-1);}});
+  function tick(){auto=setTimeout(function(){if(!document.hidden)show(i+1);tick();},im[i].tagName==='VIDEO'?6500:3500);}
+  if(!reduce){tick();}
+  Array.prototype.forEach.call(im,function(x,k){if(k<4&&x.tagName==='IMG')x.loading='eager';});})();
+</script>
+<script>
+  (function(){
+    var f=document.getElementById('contact-form');if(!f||!window.fetch)return;
+    var b=document.getElementById('cf-send'),s=document.getElementById('cf-status');
+    f.addEventListener('submit',function(e){
+      e.preventDefault();b.disabled=true;s.textContent='Sending';
+      var data=new FormData(f);data.delete('_gotcha');
+      fetch(f.action,{method:'POST',body:data,headers:{'Accept':'application/json'}})
+        .then(function(r){return r.json().catch(function(){return {};}).then(function(d){return {ok:r.ok,d:d};});})
+        .then(function(x){
+          if(x.ok){f.reset();s.textContent='Sent. Thank you, I will reply by email.';}
+          else{s.textContent=(x.d.errors&&x.d.errors.length)?x.d.errors.map(function(er){return er.message;}).join(' '):'Could not send. Please try again later.';}
+          b.disabled=false;
+        })
+        .catch(function(){s.textContent='Could not send. Check your connection and try again.';b.disabled=false;});
+    });
+  })();
+</script>
+</body>
+</html>
