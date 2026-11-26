@@ -106,6 +106,7 @@
   .switches { display:flex; flex-direction:column; gap:var(--space-2); margin:var(--space-6) 0 var(--space-12); }
   .qm:hover { text-decoration:underline; text-underline-offset:4px; }
   .qm:focus-visible { outline:var(--stroke-outline) solid var(--ink); outline-offset:4px; }
+  .phone video { display:block; width:100%; height:auto; border:var(--stroke-outline) solid var(--ink); border-radius:var(--radius-tile); background:#000; }
   .phone img[hidden] { display:none; }
   .pair { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-6); }
   .pair figcaption b { color:var(--ink); font-weight:400; }
@@ -216,7 +217,7 @@
 
     <section aria-labelledby="all">
       <div class="cols" style="align-items:center">
-        <figure class="phone" style="max-width:280px"><img src="screenshots/modicus_all_qm_mc.png" alt="The all screen: every app a to z, each name with a small icon in front, favorites marked with a star, and a letter bar at the right edge." width="720" height="1600" loading="lazy"></figure>
+        <figure class="phone" style="max-width:280px"><video id="allvid" muted loop playsinline preload="metadata" poster="screenshots/modicus_all_poster.jpg" width="540" height="1204" aria-label="The all screen: sliding a finger along the letter bar jumps through the apps, a to z, while the chosen letter shows large in the middle."><source src="screenshots/modicus_all.webm" type="video/webm"><source src="screenshots/modicus_all.mp4" type="video/mp4"></video></figure>
         <div>
           <h2 id="all">Every app, one swipe away</h2>
           <p>Favs keep your home screen short. The rest is never far: swipe once for all your apps, a to z.</p>
@@ -326,6 +327,11 @@
     <span class="meta">A launcher by RedLimesDev, published by PBLIZ! B.V. · <a href="#contact">Contact</a> · <a href="privacy.html">Privacy</a> · © 2026</span>
   </footer>
 </div>
+<script>
+  (function(){var v=document.getElementById('allvid');if(!v)return;
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce||!('IntersectionObserver' in window))return;
+  new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var p=v.play();if(p&&p.catch)p.catch(function(){});}else{v.pause();}});},{threshold:0.4}).observe(v);})();
+</script>
 <script>
   (function(){var st={qm:false,color:false},r=document.getElementById('favrow'),bs=document.querySelectorAll('.qm');
   function m(v,x){return v==='*'||v===(x?'1':'0');}
