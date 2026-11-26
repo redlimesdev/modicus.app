@@ -68,6 +68,9 @@
   .hero > div { grid-column:1; grid-row:1; }
   .carousel { grid-column:2; grid-row:1; margin:0; }
   .track { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; scroll-behavior:auto; scrollbar-width:none; border:var(--stroke-outline) solid var(--ink); border-radius:var(--radius-tile); background:#000; }
+  .track > * { opacity:1; transition:opacity .35s ease !important; }
+  .track.fade > * { opacity:0; }
+  @media (prefers-reduced-motion: reduce) { .track > * { transition:none !important; } }
   .track::-webkit-scrollbar { display:none; }
   .track:focus-visible { outline:var(--stroke-outline) solid var(--ink); outline-offset:4px; }
   .track img, .track video { flex:0 0 100%; width:100%; height:auto; display:block; scroll-snap-align:start; }
@@ -332,22 +335,24 @@
     b.textContent=(st[k]?'[x] ':'[ ] ')+b.textContent.slice(4);draw();});});draw();})();
 </script>
 <script>
-  (function(){var tr=document.querySelector('.track');if(!tr)return;var im=tr.children,n=im.length,cap=document.querySelector('.carousel .cap'),cnt=document.querySelector('.carousel .count'),i=0,auto=null;
+  (function(){var tr=document.querySelector('.track');if(!tr)return;var im=tr.children,n=im.length,cap=document.querySelector('.carousel .cap'),cnt=document.querySelector('.carousel .count'),i=0,auto=null,busy=false;
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function pad(x){return (x<10?'0':'')+x;}
   function show(k){i=(k+n)%n;tr.scrollTo({left:i*tr.clientWidth,behavior:'auto'});label();}
-  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function go(k){if(busy)return;k=(k+n)%n;if(reduce||k===i){show(k);return;}busy=true;tr.classList.add('fade');setTimeout(function(){show(k);tr.classList.remove('fade');setTimeout(function(){busy=false;},350);},350);}
   function vids(){Array.prototype.forEach.call(im,function(x,k){if(x.tagName!=='VIDEO')return;if(k===i&&!reduce){x.currentTime=0;var p=x.play();if(p&&p.catch)p.catch(function(){});}else{x.pause();}});}
   var dw=document.querySelector('.carousel .dots'),ds=[];
-  Array.prototype.forEach.call(im,function(x,k){var b=document.createElement('button');b.type='button';b.className='dot';b.setAttribute('aria-label',(k+1)+': '+x.dataset.cap);b.addEventListener('click',function(){stop();show(k);});dw.appendChild(b);ds.push(b);});
+  Array.prototype.forEach.call(im,function(x,k){var b=document.createElement('button');b.type='button';b.className='dot';b.setAttribute('aria-label',(k+1)+': '+x.dataset.cap);b.addEventListener('click',function(){stop();go(k);});dw.appendChild(b);ds.push(b);});
   function label(){vids();cap.textContent=im[i].dataset.cap;cnt.textContent=pad(i+1)+' / '+pad(n);ds.forEach(function(b,k){b.setAttribute('aria-current',k===i?'true':'false');});}
   label();
   tr.addEventListener('scroll',function(){var k=Math.round(tr.scrollLeft/tr.clientWidth);if(k!==i){i=k;label();}},{passive:true});
   function stop(){if(auto){clearTimeout(auto);auto=null;}}
   ['pointerdown','wheel','touchstart','keydown'].forEach(function(e){tr.addEventListener(e,stop,{passive:true});});
-  document.querySelector('.carousel .prev').addEventListener('click',function(){stop();show(i-1);});
-  document.querySelector('.carousel .next').addEventListener('click',function(){stop();show(i+1);});
-  tr.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){e.preventDefault();show(i+1);}if(e.key==='ArrowLeft'){e.preventDefault();show(i-1);}});
-  function tick(){auto=setTimeout(function(){if(!document.hidden)show(i+1);tick();},im[i].tagName==='VIDEO'?Math.round(((im[i].duration||6.5)+(im[i].loop?0.3:1.5))*1000):3500);}
+  document.querySelector('.carousel .prev').addEventListener('click',function(){stop();go(i-1);});
+  document.querySelector('.carousel .next').addEventListener('click',function(){stop();go(i+1);});
+  tr.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){e.preventDefault();go(i+1);}if(e.key==='ArrowLeft'){e.preventDefault();go(i-1);}});
+  function dwell(x){return x.tagName==='VIDEO'?Math.round(((x.duration||6.5)+(x.loop?0.3:1.5))*1000):3500;}
+  function tick(){auto=setTimeout(function(){if(!document.hidden)go(i+1);auto=setTimeout(tick,reduce?0:750);},dwell(im[i]));}
   if(!reduce){tick();}
   Array.prototype.forEach.call(im,function(x,k){if(k<4&&x.tagName==='IMG')x.loading='eager';});})();
 </script>
