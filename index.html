@@ -165,7 +165,7 @@
           <video muted loop playsinline preload="auto" poster="screenshots/modicus_groups_poster.jpg" data-cap="groups" width="540" height="1204" aria-label="favs as groups: tap the socials group and it opens to show its apps, Bluesky, Facebook, Instagram, Patreon and Substack."><source src="screenshots/modicus_groups.webm" type="video/webm"><source src="screenshots/modicus_groups.mp4" type="video/mp4"></video>
           <img src="screenshots/modicus_cloud_qm_mc.jpg" alt="favs as a word cloud, most-used apps larger, with the quick menu at the bottom." data-cap="cloud" width="1080" height="2408" loading="lazy">
           <img src="screenshots/modicus_icons_qm_mc.jpg" alt="favs as monochrome icons in outlined squares, with the quick menu at the bottom." data-cap="icons" width="1080" height="2408" loading="lazy">
-          <img src="screenshots/modicus_all_qm_mc.png" alt="All apps a to z, each with a small icon, and a letter bar." data-cap="all" width="720" height="1600" loading="lazy">
+          <video muted loop playsinline preload="metadata" poster="screenshots/modicus_all_poster.jpg" data-cap="all" width="540" height="1204" aria-label="The all screen: sliding a finger along the letter bar jumps through the apps, a to z."><source src="screenshots/modicus_all.webm" type="video/webm"><source src="screenshots/modicus_all.mp4" type="video/mp4"></video>
         </div>
         <div class="dots" aria-label="choose a screen"></div>
         <figcaption><button type="button" class="nav prev" aria-label="previous screen">[&lt;]</button><span class="cap" aria-live="polite">groups</span><span class="count">01 / 04</span><button type="button" class="nav next" aria-label="next screen">[&gt;]</button></figcaption>
@@ -354,7 +354,7 @@
   document.querySelector('.carousel .prev').addEventListener('click',function(){stop();show(i-1);});
   document.querySelector('.carousel .next').addEventListener('click',function(){stop();show(i+1);});
   tr.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){e.preventDefault();show(i+1);}if(e.key==='ArrowLeft'){e.preventDefault();show(i-1);}});
-  function tick(){auto=setTimeout(function(){if(!document.hidden)show(i+1);tick();},im[i].tagName==='VIDEO'?6500:3500);}
+  function tick(){auto=setTimeout(function(){if(!document.hidden)show(i+1);tick();},im[i].tagName==='VIDEO'?Math.round(((im[i].duration||6.5)+0.3)*1000):3500);}
   if(!reduce){tick();}
   Array.prototype.forEach.call(im,function(x,k){if(k<4&&x.tagName==='IMG')x.loading='eager';});})();
 </script>
