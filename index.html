@@ -72,7 +72,7 @@
   .track:focus-visible { outline:var(--stroke-outline) solid var(--ink); outline-offset:4px; }
   .track img { flex:0 0 100%; width:100%; height:auto; display:block; scroll-snap-align:start; }
   .carousel figcaption { display:flex; align-items:baseline; gap:var(--space-2); margin-top:var(--space-2); font-size:14px; line-height:20px; }
-  .carousel .cap { flex:1; text-align:center; color:var(--ink); }
+  .carousel .cap { flex:1; text-align:center; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .carousel .count { color:var(--gray); }
   .dots { display:none; justify-content:center; gap:2px; margin-top:var(--space-2); }
   .dot { width:20px; height:24px; padding:0; border:0; background:none; cursor:pointer; display:flex; align-items:center; justify-content:center; }
@@ -163,10 +163,10 @@
       <figure class="carousel" aria-roledescription="carousel" aria-label="modicus screens">
         <div class="track" tabindex="0">
           <img src="screenshots/modicus_az_groups_qm_mc.jpg" alt="favs as groups: ai, car, finance, home, media, news, shopping, socials and travel, each with a plus sign, and a star for the rest, with the quick menu at the bottom." data-cap="groups" width="1080" height="2408">
-          <img src="screenshots/modicus_az_groups_qm_mc-open.jpg" alt="The socials group opened, with the quick menu at the bottom." data-cap="groups · one open" width="1080" height="2408">
+          <img src="screenshots/modicus_az_groups_qm_mc-open.jpg" alt="The socials group opened, with the quick menu at the bottom." data-cap="groups open" width="1080" height="2408">
           <img src="screenshots/modicus_cloud_qm_mc.jpg" alt="favs as a word cloud, most-used apps larger, with the quick menu at the bottom." data-cap="cloud" width="1080" height="2408" loading="lazy">
           <img src="screenshots/modicus_icons_qm_mc.jpg" alt="favs as monochrome icons in outlined squares, with the quick menu at the bottom." data-cap="icons" width="1080" height="2408" loading="lazy">
-          <img src="screenshots/modicus_all_qm_mc.png" alt="All apps a to z, each with a small icon, and a letter bar." data-cap="all · with small icons" width="720" height="1600" loading="lazy">
+          <img src="screenshots/modicus_all_qm_mc.png" alt="All apps a to z, each with a small icon, and a letter bar." data-cap="all" width="720" height="1600" loading="lazy">
         </div>
         <div class="dots" aria-label="choose a screen"></div>
         <figcaption><button type="button" class="nav prev" aria-label="previous screen">[&lt;]</button><span class="cap" aria-live="polite">groups</span><span class="count">01 / 05</span><button type="button" class="nav next" aria-label="next screen">[&gt;]</button></figcaption>
