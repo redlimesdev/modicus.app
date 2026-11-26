@@ -165,7 +165,7 @@
           <video muted loop playsinline preload="auto" poster="screenshots/modicus_groups_poster.jpg" data-cap="groups" width="540" height="1204" aria-label="favs as groups: tap the socials group and it opens to show its apps, Bluesky, Facebook, Instagram, Patreon and Substack."><source src="screenshots/modicus_groups.webm" type="video/webm"><source src="screenshots/modicus_groups.mp4" type="video/mp4"></video>
           <img src="screenshots/modicus_cloud_qm_mc.jpg" alt="favs as a word cloud, most-used apps larger, with the quick menu at the bottom." data-cap="cloud" width="1080" height="2408" loading="lazy">
           <img src="screenshots/modicus_icons_qm_mc.jpg" alt="favs as monochrome icons in outlined squares, with the quick menu at the bottom." data-cap="icons" width="1080" height="2408" loading="lazy">
-          <video muted loop playsinline preload="metadata" poster="screenshots/modicus_all_poster.jpg" data-cap="all" width="540" height="1204" aria-label="The all screen: sliding a finger along the letter bar jumps through the apps, a to z."><source src="screenshots/modicus_all.webm" type="video/webm"><source src="screenshots/modicus_all.mp4" type="video/mp4"></video>
+          <video muted playsinline preload="metadata" poster="screenshots/modicus_all_poster.jpg" data-cap="all" width="540" height="1204" aria-label="The all screen: sliding a finger along the letter bar jumps through the apps, a to z."><source src="screenshots/modicus_all.webm" type="video/webm"><source src="screenshots/modicus_all.mp4" type="video/mp4"></video>
         </div>
         <div class="dots" aria-label="choose a screen"></div>
         <figcaption><button type="button" class="nav prev" aria-label="previous screen">[&lt;]</button><span class="cap" aria-live="polite">groups</span><span class="count">01 / 04</span><button type="button" class="nav next" aria-label="next screen">[&gt;]</button></figcaption>
@@ -216,7 +216,7 @@
 
     <section aria-labelledby="all">
       <div class="cols" style="align-items:center">
-        <figure class="phone" style="max-width:280px"><video id="allvid" muted loop playsinline preload="metadata" poster="screenshots/modicus_all_poster.jpg" width="540" height="1204" aria-label="The all screen: sliding a finger along the letter bar jumps through the apps, a to z, while the chosen letter shows large in the middle."><source src="screenshots/modicus_all.webm" type="video/webm"><source src="screenshots/modicus_all.mp4" type="video/mp4"></video></figure>
+        <figure class="phone" style="max-width:280px"><video id="allvid" muted playsinline preload="metadata" poster="screenshots/modicus_all_poster.jpg" width="540" height="1204" aria-label="The all screen: sliding a finger along the letter bar jumps through the apps, a to z, while the chosen letter shows large in the middle."><source src="screenshots/modicus_all.webm" type="video/webm"><source src="screenshots/modicus_all.mp4" type="video/mp4"></video></figure>
         <div>
           <h2 id="all">Every app, one swipe away</h2>
           <p>Favs keep your home screen short. The rest is never far: swipe once for all your apps, a to z.</p>
@@ -329,7 +329,7 @@
 <script>
   (function(){var v=document.getElementById('allvid');if(!v)return;
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce||!('IntersectionObserver' in window))return;
-  new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var p=v.play();if(p&&p.catch)p.catch(function(){});}else{v.pause();}});},{threshold:0.4}).observe(v);})();
+  new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){v.currentTime=0;var p=v.play();if(p&&p.catch)p.catch(function(){});}else{v.pause();}});},{threshold:0.4}).observe(v);})();
 </script>
 <script>
   (function(){var st={qm:false,color:false},r=document.getElementById('favrow'),bs=document.querySelectorAll('.qm');
@@ -354,7 +354,7 @@
   document.querySelector('.carousel .prev').addEventListener('click',function(){stop();show(i-1);});
   document.querySelector('.carousel .next').addEventListener('click',function(){stop();show(i+1);});
   tr.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){e.preventDefault();show(i+1);}if(e.key==='ArrowLeft'){e.preventDefault();show(i-1);}});
-  function tick(){auto=setTimeout(function(){if(!document.hidden)show(i+1);tick();},im[i].tagName==='VIDEO'?Math.round(((im[i].duration||6.5)+0.3)*1000):3500);}
+  function tick(){auto=setTimeout(function(){if(!document.hidden)show(i+1);tick();},im[i].tagName==='VIDEO'?Math.round(((im[i].duration||6.5)+(im[i].loop?0.3:1.5))*1000):3500);}
   if(!reduce){tick();}
   Array.prototype.forEach.call(im,function(x,k){if(k<4&&x.tagName==='IMG')x.loading='eager';});})();
 </script>
